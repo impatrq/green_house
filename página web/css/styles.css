@@ -1,0 +1,80 @@
+:root{
+    --verde: #419E5B;
+}
+
+body{
+    font-family: 'Jost', sans-serif;
+}
+
+.item{
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    color: grey;
+    font-size: 2rem;
+}
+
+.item:hover{
+    font-size: 2.2rem;
+    color:#419E5B;
+}
+
+.contenedor{
+    width: 50%;
+    background-color: var(--verde);
+    height: 100%;
+}
+
+.slogan{
+    margin: 200px 100px 5px 150px;
+    font-size:5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.description{
+    margin: 50px 350px 50px 100px;
+    padding-right: 10%;
+    padding-left: 10%;
+    font-size: 2rem;
+    font-weight: lighter;
+    color:whitesmoke;
+}
+
+.tamaño{
+    height: 180px;
+}
+
+.hero{
+    height: calc(100vh - 180px);
+    display: flex;
+}
+.nav-logo{
+    padding-left: 3%;
+}
+.fondo{
+    width: 50%;
+}
+
+.btn{
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    color:var(--verde);
+    font-size: 27px;
+    text-decoration: none;
+    background-color: white;
+    margin-left: 400px;
+}
+
+.btn:hover{
+    background-color: white;
+}
+
+.containerr{
+    width: 50%;
+    display: flex;
+    padding-right: 10%;
+    justify-content: space-between;
+}
+    
+
