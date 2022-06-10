@@ -1,0 +1,49 @@
+@media (min-width:800px) {
+
+    body{
+        height: 657px;
+    }
+    .hero {
+        height: calc(657px - 80px);
+    }
+    .tamaño{
+        height: 80px;
+    }
+    .nav-logo{
+        height: 80px;
+    }
+    .item{
+        font-size: 1.5rem;
+    }
+    .item:hover{
+        font-size: 1.7rem;
+        color:#419E5B;
+    }
+    .navbar-brand img{
+        padding-bottom: 10px;
+        height: 80px;
+    }
+    .containerr{
+        padding-bottom: 10px;
+    }
+    .slogan{
+        margin: 50px;
+        padding: 25px 25px 0px 25px;
+        font-size: 3.5rem;
+    }
+    .description{
+        margin: 0px 10px 2px 10px;
+        font-size: 1.4rem;
+    }
+    .contenedor{
+        height: calc(657px - 80px);
+    }
+    .fondo{
+        height: calc(657px - 80px);
+    }
+    .btn{
+        font-size: 1.3rem;
+        margin-top: 50px;
+        margin-left: 225px;
+    }
+}
