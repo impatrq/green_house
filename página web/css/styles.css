@@ -76,5 +76,27 @@ body{
     padding-right: 10%;
     justify-content: space-between;
 }
-    
-
+main{
+    background-color: var(--verde);
+    height: calc(100vh - 180px);
+    border: 1px white;
+    display: flex;
+}
+.guia-1{
+    border: 1px solid;
+    margin-top: 100px;
+    margin-left: 25px;
+    margin-right: 25px;
+    width: 33%;
+    height: 377px;
+    color: white;
+    text-align: center;
+    display: block;
+}
+.text{
+    padding-top: 10px;
+}
+.momo{
+    padding-top: 25px;
+    width: 250px;
+}

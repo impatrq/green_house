@@ -46,4 +46,7 @@
         margin-top: 50px;
         margin-left: 225px;
     }
+    main{
+        height: calc(100vh - 80px);
+    }
 }
