@@ -1,6 +1,5 @@
 # Greenhouse
-
-AGREGAR LOGO
+<center> <img src="imagenes/logo.jpg" alt="Logo proyecto" width="250"/> </center>
 
 ## Qué es y cuál es su fin?
 
@@ -10,6 +9,7 @@ Greenhouse es un invernadero inteligente cuya función es controlar parámetros 
 Greenhouse es un proyecto en proceso realizado por alumnos de la Escuela Secundaria IMPA de 7mo 2da Avionica.
 
 ## Integrantes
+<center> <img src="imagenes/integrantes.jpg" alt="Integrantes" width="450"/> </center>
 
 ### Uriel Benitez
     📷 Instagram: urielbenitezz
