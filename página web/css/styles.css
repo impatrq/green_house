@@ -10,7 +10,7 @@ body{
     text-decoration: none;
     transition: 0.3s ease-in-out;
     color: grey;
-    font-size: 2rem;
+    font-size: 1.75rem;
 }
 
 .item:hover{
@@ -26,16 +26,15 @@ body{
 
 .slogan{
     margin: 200px 100px 5px 150px;
-    font-size:5rem;
+    font-size:4rem;
     font-weight: bold;
     color: white;
 }
 
 .description{
-    margin: 50px 350px 50px 100px;
-    padding-right: 10%;
-    padding-left: 15%;
-    font-size: 2rem;
+    margin: 50px 350px 50px 150px;
+    padding-left: 6%;
+    font-size: 1.5rem;
     font-weight: lighter;
     color:whitesmoke;
 }
@@ -72,7 +71,7 @@ body{
 }
 
 .container{
-    width: 75%;
+    width: 62%;
     padding-left: 12%;
     padding-right: 2%;
     margin-right: 0px;
