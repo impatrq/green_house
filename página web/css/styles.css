@@ -35,7 +35,7 @@ body{
 
 .description{
     margin-top: 50px;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     padding-left: 300px;
     padding-right: 300px;
     text-align: center;
@@ -86,6 +86,87 @@ main{
     border: 1px white;
     display: flex;
 }
+
+@media (min-width: 312px) and (max-width: 480px){
+    .description{
+        padding-left: 25px;  
+        padding-right: 25px;
+        font-size: 1.4rem;
+    }
+    .slogan{
+        margin-top: 200px;
+    }
+    .slogan h2{
+        font-size: 3.5rem;
+    }
+    .contenedor{
+        width: 100%;
+    }
+    .fondo{
+        display: none;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 768px){
+    .slogan h2{
+        font-size: 3.5rem;
+    }
+    .slogan{
+        margin-top: 200px;
+    }
+    .description{
+        padding-left: 20px;  
+        padding-right: 20px;
+    }
+    .fondo{
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 768px) and (max-width:1140px){
+    .slogan{
+        margin-top: 200px;
+    }
+    .description{
+        padding-left: 100px;  
+        padding-right: 100px;
+    }
+    .fondo{
+        object-fit: cover;
+    }
+}
+@media (min-width: 768px) and (max-width:1140px){
+    .slogan{
+        margin-top: 200px;
+    }
+    .description{
+        padding-left: 100px;  
+        padding-right: 100px;
+    }
+    .fondo{
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 1140px) and (max-width:1440px){
+    .slogan{
+        margin-top: 200px;
+    }
+    .description{
+        padding-left: 25px;  
+        padding-right: 25px;
+    }
+    .fondo{
+        object-fit: cover;
+    }
+}
+.btn-primary {
+    background-color: #419E5B;
+    color: white;
+    border-color: #419E5B;
+    margin: 0%;
+}
+
 .guia-1{
     border: 1px solid;
     margin-top: 100px;
