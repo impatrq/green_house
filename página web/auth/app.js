@@ -18,24 +18,31 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
+//Funcionalidad Sign Up
 document.getElementById("signup").addEventListener("click", function () {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+    const span = document.getElementById("error-message");
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
             console.log("User Created")
+            open("../index.html", "_self");                      
         })
         .catch((error) => {
             const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode + errorMessage)
+            console.log (errorCode)
+            span.style.visibility = 'visible';
+            span.textContent = errorCode;
         });
 })
 
+
+//Funcionalidad Login
 document.getElementById("login").addEventListener("click", function () {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+    const span = document.getElementById("error-message");
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             console.log("User Signed In")
@@ -44,7 +51,8 @@ document.getElementById("login").addEventListener("click", function () {
         })
         .catch((error) => {
             const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode + errorMessage)
+            console.log (errorCode)
+            span.style.visibility = 'visible';
+            span.textContent = errorCode;
         });
 })
