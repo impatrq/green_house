@@ -1,5 +1,6 @@
 :root{
     --verde: #419E5B;
+
 }
 
 body{
@@ -10,11 +11,11 @@ body{
     text-decoration: none;
     transition: 0.3s ease-in-out;
     color: grey;
-    font-size: 1.75rem;
+    font-size: 1.75em;
 }
 
 .item:hover{
-    font-size: 1.85rem;
+    font-size: 1.85em;
     color:#419E5B;
 }
 
@@ -25,34 +26,32 @@ body{
 }
 
 .slogan{
-    margin-top: 200px;
+    margin-top: 12.5em;
     text-align: center;
     color: white;
 }
 .slogan h2{
-    font-size: 4rem;
+    font-size: 4em;
 }
 
 .description{
-    margin-top: 50px;
-    font-size: 1.5rem;
-    padding-left: 300px;
-    padding-right: 300px;
+    margin-top: 3.125em;
+    font-size: 1.5em;
     text-align: center;
     color: white;
 }
 
 .tamaño{
-    height: 100px;
+    height: 6.25em;
 }
 
 .hero{
-    height: calc(100vh - 100px);
+    height: calc(100vh - 6.25em);
     display: flex;
 }
 .nav-logo img{
-    padding-left: 15%;
-    width: 200px;
+    width: 9.5em;
+    margin-left: 2em;
 }
 .fondo{
     width: 50%;
@@ -61,17 +60,19 @@ body{
 .btn{
     -webkit-border-radius: 28;
     -moz-border-radius: 28;
-    border-radius: 28px;
+    border-radius: 1.75em;
     color:var(--verde);
-    font-size: 27px;
+    font-size: 1.6875em;
     text-decoration: none;
     background-color: white;
     margin-left: 42.5%;
-    margin-top: 50px;
+    margin-top: 3.125em;
 }
 
 .btn:hover{
     background-color: white;
+    color: #419E5B;
+    border-color: #419E5B;
 }
 
 .container{
@@ -82,84 +83,11 @@ body{
 }
 main{
     background-color: var(--verde);
-    height: calc(100vh - 100px);
-    border: 1px white;
+    height: calc(100vh - 6.25em);
+    border: 0.0625em white;
     display: flex;
 }
 
-@media (min-width: 312px) and (max-width: 480px){
-    .description{
-        padding-left: 25px;  
-        padding-right: 25px;
-        font-size: 1.4rem;
-    }
-    .slogan{
-        margin-top: 200px;
-    }
-    .slogan h2{
-        font-size: 3.5rem;
-    }
-    .contenedor{
-        width: 100%;
-    }
-    .fondo{
-        display: none;
-    }
-}
-
-@media (min-width: 480px) and (max-width: 768px){
-    .slogan h2{
-        font-size: 3.5rem;
-    }
-    .slogan{
-        margin-top: 200px;
-    }
-    .description{
-        padding-left: 20px;  
-        padding-right: 20px;
-    }
-    .fondo{
-        object-fit: cover;
-    }
-}
-
-@media (min-width: 768px) and (max-width:1140px){
-    .slogan{
-        margin-top: 200px;
-    }
-    .description{
-        padding-left: 100px;  
-        padding-right: 100px;
-    }
-    .fondo{
-        object-fit: cover;
-    }
-}
-@media (min-width: 768px) and (max-width:1140px){
-    .slogan{
-        margin-top: 200px;
-    }
-    .description{
-        padding-left: 100px;  
-        padding-right: 100px;
-    }
-    .fondo{
-        object-fit: cover;
-    }
-}
-
-@media (min-width: 1140px) and (max-width:1440px){
-    .slogan{
-        margin-top: 200px;
-    }
-    .description{
-        padding-left: 25px;  
-        padding-right: 25px;
-    }
-    .fondo{
-        object-fit: cover;
-    }
-}
 .btn-primary {
     background-color: #419E5B;
     color: white;
@@ -169,22 +97,13 @@ main{
 
 .guia-1{
     border: 1px solid;
-    margin-top: 100px;
-    margin-left: 25px;
-    margin-right: 25px;
-    width: 33%;
-    height: 450px;
+    margin-top: 6.25em;
+    height: fit-content;
     color: white;
     text-align: center;
     display: block;
 }
-.text{
-    padding-top: 10px;
-}
 .momo{
-    padding-top: 25px;
-    width: 250px;
-}
-.text{
-    font-size: 2rem;
+    padding-top: 1.5625em;
+    width: 15.625em;
 }
