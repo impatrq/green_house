@@ -1,0 +1,44 @@
+@media (min-width:768px ) and (max-width:1199px){
+    .slogan{
+        margin: 3em 0 0 0;
+        font-size: 0.75em;
+    }
+    .navlap{
+        visibility: collapse;
+    }
+
+    #ipadlogo{
+        width: 8em;
+    }
+    .nav-item{
+        font-size: 1.2em;
+    }
+    .description{
+        padding: 0%;
+    }
+    .hero{
+        /*height: 1024px;*/
+    }
+    .fondo{
+        object-fit: cover;
+    }
+    .boton{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .btnlap{
+        border-radius: 2em;
+        font-size: 1.5em;
+        margin-top: 1em;
+        color: #419E5B;
+        padding: 0.37em 0.75em;
+        border-style: initial;
+       }
+       .btnlap:hover{
+        background-color: #419E5B;
+        color: white;
+        border-color: white;
+        border-style: double;
+       }
+    }
