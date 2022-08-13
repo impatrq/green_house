@@ -2,6 +2,10 @@
     --verde: #419E5B;
 
 }
+#movtitle{
+    text-decoration: none;
+    color: #419E5B;
+}
 
 body{
     font-family: 'Jost', sans-serif;
