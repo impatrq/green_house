@@ -11,11 +11,14 @@
     <link rel="preload" href="css/styles.css" as="style">
     <link rel="icon" href="img/favicon.ico">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/1440x900.css">
+    <link rel="stylesheet" href="css/768x1024.css">
+    <link rel="stylesheet" href="css/375x812.css">
     <title>GreenHouse Project</title>
 </head>
 <body>
     <header>
-        <nav class="navbar bg-light tamaño">
+        <nav class="navbar bg-light tamaño navlap">
             <div class="nav-logo">
                 <a class="navbar-brand" href="index.html">
                     <img src="img/grinja.png" alt="logo">
@@ -26,7 +29,37 @@
                 <a class="item" href="guia.html">Guías</a>
                 <a class="item" href="#">Galería</a>
                 <a class="item" href="#">Contacto</a>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Forma Parte</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Forma parte</button>
+            </div>
+          </nav>
+          <nav class="navbar bg-light fixed-top navipad">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="index.html"><img src="img/grinja.png" alt="ipadlogo" id="ipadlogo"></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasNavbarLabel">GreenHouse</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="#">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Guías</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Galería</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Contacto</a>
+                      </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </nav>
     </header>
@@ -37,6 +70,9 @@
             </div>
             <div class="description">
                 <p>GreenHouse es un proyecto que apunta a mejorar la alimentación y fomentar el cultivo fuera de estación de manera doméstica</p>
+            </div>
+            <div class="boton">
+              <button type="button" class="btnlap">Forma parte</button>
             </div>
         </div>
         <img src="img/fondocultivo.png" alt="cultivo" class="fondo">
