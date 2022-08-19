@@ -1,20 +1,28 @@
 from hashlib import sha1
 import socket
-import dht
-from machine import Pin
+from dht import DHT11
+from machine import Pin, ADC
 from time import sleep
 
 s1 = "24"
 s2 = "59"
-s3 = "48"
+s3 = "48"   
 s4 = "100" 
 
-# def getAndPrintTH():
-#     dht = dht.DHT22(Pin(16))
-#     dht.measure()
-#     temp = dht.temperature()
-#     sleep(2)
-#     print('Temperatura: %3.1f C' %temp)
+def getDHT():
+        dht =DHT11(Pin(09))
+        dht.measure()
+        print("La temp es: " ,dht.temperature)
+        sleep(3)
+        
+
+def getLDR():                                               
+    adc = ADC(Pin(39))
+    val_read = adc.read() * (3.3/4096)
+    print("El valor de tensión del LDR es: {:.2f}" .format(val_read))
+    RLDR = (val_read * 10000)/(3.3 - val_read)
+    print("El valor de la resistencia del LDR es: {:.0f}" .format(RLDR))
+    sleep(3)
 
 def webPage():
 
@@ -86,10 +94,10 @@ def webPage():
     
     return html
     
-
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(('', 80))
 s.listen(5)
+
 
 while True:
     try:
