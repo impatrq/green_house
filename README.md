@@ -2,7 +2,7 @@
 
 # Greenhouse
 
-<img src="imagenes/logo.jpg" alt="Logo proyecto" width="250"/>
+<img src="Imágenes/logo.jpg" alt="Logo proyecto" width="250"/>
 
 </div>
 
@@ -16,7 +16,7 @@ Greenhouse es un proyecto en proceso realizado por alumnos de la Escuela Secunda
 ## Integrantes
 <div align="center">
 
-<img src="imagenes/integrantes.jpg" alt="Integrantes" width="450"/>
+<img src="Imágenes/integrantes.jpg" alt="Integrantes" width="450"/>
 
 </div>
 
