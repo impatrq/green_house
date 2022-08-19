@@ -2,33 +2,39 @@
     --verde: #419E5B;
 
 }
-#movtitle{
-    text-decoration: none;
-    color: #419E5B;
+/* Globales */
+html{
+    box-sizing: border-box;
 }
-
+*, *:before, *:after {
+    box-sizing: inherit;
+  }
 body{
     font-family: 'Jost', sans-serif;
 }
-
-.item{
+main{
+    background-color: var(--verde);
+    height: calc(100vh - 6.25em);
+    border: 0.0625em white;
+    display: flex;
+}
+.fondo{
+    width: 50%;
+}
+#ham_title{
     text-decoration: none;
-    transition: 0.3s ease-in-out;
-    color: grey;
-    font-size: 1.75em;
+    color: #419E5B;
 }
-
-.item:hover{
-    font-size: 1.85em;
-    color:#419E5B;
+/*  main content */
+.hero{
+    height: calc(100vh - 6.25em);
+    display: flex;
 }
-
 .contenedor{
     width: 50%;
     background-color: var(--verde);
     height: 100%;
 }
-
 .slogan{
     margin-top: 12.5em;
     text-align: center;
@@ -37,30 +43,12 @@ body{
 .slogan h2{
     font-size: 4em;
 }
-
 .description{
     margin-top: 3.125em;
     font-size: 1.5em;
     text-align: center;
     color: white;
 }
-
-.tamaño{
-    height: 6.25em;
-}
-
-.hero{
-    height: calc(100vh - 6.25em);
-    display: flex;
-}
-.nav-logo img{
-    width: 9.5em;
-    margin-left: 2em;
-}
-.fondo{
-    width: 50%;
-}
-
 .btn{
     -webkit-border-radius: 28;
     -moz-border-radius: 28;
@@ -72,33 +60,42 @@ body{
     margin-left: 42.5%;
     margin-top: 3.125em;
 }
-
 .btn:hover{
     background-color: white;
     color: #419E5B;
     border-color: #419E5B;
 }
-
+/* navlap content */
 .container{
     width: 62%;
     padding-left: 12%;
     padding-right: 2%;
     margin-right: 0px;
 }
-main{
-    background-color: var(--verde);
-    height: calc(100vh - 6.25em);
-    border: 0.0625em white;
-    display: flex;
+.item{
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    color: grey;
+    font-size: 1.75em;
 }
-
+.item:hover{
+    font-size: 1.85em;
+    color:#419E5B;
+}
 .btn-primary {
     background-color: #419E5B;
     color: white;
     border-color: #419E5B;
     margin: 0%;
 }
-
+.nav-logo img{
+    width: 9.5em;
+    margin-left: 2em;
+}
+.tamaño{                  /* tamaño nav lap */
+    height: 6.25em;
+}
+/* Pestaña Guia */
 .guia-1{
     border: 1px solid;
     margin-top: 6.25em;
@@ -111,3 +108,66 @@ main{
     padding-top: 1.5625em;
     width: 15.625em;
 }
+/* Contacto */
+.contacto_main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+/*.form_cont{
+    width: 75%;
+    margin: 0 auto;
+    height: 100%;
+    padding-top: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 2em;
+    border-bottom-left-radius: 0em;
+    border-bottom-right-radius: 0em;
+    background-color: rgba(0, 0, 0, 0.25); 
+}
+*/
+.formulario{
+    padding: 5em;
+    margin-top: 1em;
+    width: min( 60em, 100%);
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 2em;
+    border-bottom-left-radius: 0em;
+    border-bottom-right-radius: 0em;
+    position: absolute;
+    bottom: 0;
+    top: 12em;
+}
+h1{
+    font-size: 3em;
+    color: white;
+    font-weight: lighter;
+    position: absolute;
+    top: 1.5em;
+}
+.campo{
+    margin-bottom: 1em;
+    width: 100%;
+}
+.campo-text{
+    border: none;
+    width: 75%;
+    height: 1.5em;
+    border-radius: 1em;
+    padding: 2em;
+}
+.campo-text-mensaje{
+    border: none;
+    width: 75%;
+    border-radius: 1em;
+    padding: 2em;
+}
+#redes{
+    margin-top: 2.5em;
+}
+
