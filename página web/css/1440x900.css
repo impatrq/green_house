@@ -42,16 +42,16 @@
     }
     .cont_guia{
 
-        width: 100vw;
+        /*width: 100vw;
         display: flex;
         justify-content: space-between;
-        padding: 0 2em;
+        padding: 0 2em;*/
         
-        /*width: 100vw;
+        width: 100vw;
         display: grid;
-        grid-template-columns: 300px 300px 300px;
+        grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 10em;
-        padding: 0 10em;*/
+        padding: 0 15em;
     }
     .momo{
         width: 10em;
