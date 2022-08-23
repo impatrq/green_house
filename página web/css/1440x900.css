@@ -56,18 +56,4 @@
     .momo{
         width: 10em;
     }
-    .btnguia{
-        border-radius: 2em;
-        font-size: 1em;
-        margin-top: 1em;
-        color: #419E5B;
-        padding: 0.37em 0.75em;
-        border-style: initial;
-    }
-    .btnguia:hover{
-        background-color: #419E5B;
-        color: white;
-        border-color: white;
-        border-style: double;
-    }
 }
