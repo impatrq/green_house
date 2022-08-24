@@ -1,4 +1,4 @@
-@media (min-width:768px ) and (max-width:1199px){
+@media (min-width:768px) and (max-width:1199px){
     .slogan{
         margin: 3em 0 0 0;
         font-size: 0.75em;
@@ -66,5 +66,8 @@
     }
     .text{
         padding: 0.5em;
+    }
+    .contenedor{
+        font-size: 0.8em;
     }
 }

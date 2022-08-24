@@ -1,8 +1,8 @@
-@media (min-width:1200px) {
+@media (min-width:1400px) {
     main{
         background-image: url('../img/Background_Guias.png');
     }
-
+    
     .description {
         margin: 2.5em 5.75em 0 5.75em;
         padding: 0;

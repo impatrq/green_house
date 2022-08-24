@@ -1,0 +1,80 @@
+@media (min-width: 1200px) and (max-width:1439px){
+    /*index*/
+    .item{
+        font-size: 1.4em;
+    }
+    .item:hover{
+        font-size: 1.65em;
+    }
+    .tamaño{
+        height: fit-content;
+    }
+    .navlap{
+        height: fit-content;
+    }
+    .navipad{
+        visibility: collapse;
+    }
+    .nav-logo img{
+        margin-left: 1em;
+        width: 8em;
+    }
+    .btn{
+        font-size: 1.4em;
+    }
+    .slogan{
+        margin-top: 2em;
+    }
+    .boton{
+        display: none;
+    }
+    .hero{
+        height: calc(100vh - 5.55em);
+    }
+    .description{
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+    /*contacto*/
+    .contacto_main{
+        height: calc(100vh - 5.55em);
+    }
+    #contacto-title{
+        font-size: 2em;
+        top: 0.75em;
+    }
+    .formulario{
+        top: 4em;
+    }
+    /* guia */
+    .main-guia{
+        height: calc(100vh - 5.55em);
+        background-image: url(../img/Background_Guias.png);
+    }
+    .navipad{
+        height: 5.55em;
+        visibility: hidden;
+    }
+    .container-fluid{
+        height: 5.55em;
+    }
+    .guia-1{
+        margin-top: 0%;
+        border: none;
+        border-radius: 2em;
+        background-color: rgba(13, 101, 38, 0.25);
+        width: 15em;
+        margin: 0 auto;
+    }
+    .cont_guia{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 3em;
+        padding-top: 5em;
+        padding-left: 3em;
+        padding-right: 3em;
+    }
+    .momo{
+        width: 10em;
+    }
+}
