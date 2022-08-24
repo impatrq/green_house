@@ -77,4 +77,13 @@
     .momo{
         width: 10em;
     }
+    /* galeria */
+    .galeria_main{
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 5.55em);
+        background-image: url(../img/Background_Guias.png);
+    }
+
+
 }
