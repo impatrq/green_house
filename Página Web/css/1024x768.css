@@ -37,7 +37,7 @@
     }
     /*contacto*/
     .contacto_main{
-        height: calc(100vh - 5.55em);
+        height: calc(100vh - 5.550625em);
     }
     #contacto-title{
         font-size: 2em;
@@ -46,9 +46,18 @@
     .formulario{
         top: 4em;
     }
+    .campo-text{
+        font-size: 1em;
+    }
+    .campo-text-mensaje{
+        font-size: 1em;
+    }
+    .text h2{
+        font-size: 2em;
+    }
     /* guia */
     .main-guia{
-        height: calc(100vh - 5.55em);
+        height: calc(100vh - 5.550625em);
         background-image: url(../img/Background_Guias.png);
     }
     .navipad{
@@ -70,9 +79,10 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 3em;
-        padding-top: 5em;
-        padding-left: 3em;
-        padding-right: 3em;
+        padding-top: 4em;
+        padding-left: 4em;
+        padding-right: 4em;
+        height: calc(100vh - 5.550625em);
     }
     .momo{
         width: 10em;
@@ -81,7 +91,7 @@
     .galeria_main{
         display: flex;
         flex-direction: column;
-        height: calc(100vh - 5.55em);
+        height: calc(100vh - 5.550625em);
         background-image: url(../img/Background_Guias.png);
     }
 
