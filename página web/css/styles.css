@@ -194,4 +194,39 @@ h1{
 #contacto-title{
     font-size: 4em;
 }
+/* galeria */
+.galeria_main{
+    height: 53em;
+}
+.carrousel{
+    height: fit-content;
+    width: 100%;
+    border: 1px solid;
+    border-color: black;
+}
+.carrousel .grande{
+    width: 300%;
+    display: flex;
+    flex-direction: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.carrousel .img{
+    -webkit-box-shadow: 5px 5px 50px 27px #000000; 
+    box-shadow: 5px 5px 50px 27px #000000;  
+    border: none;
+    border-radius: 2em;
+    width: calc(100% / 3);
+    height: 40em;
+}
+.puntos{
+    width: 100%;
+    display: flex;
+    flex-direction: row nowrap;
+    justify-content: center;
+    margin-top: 2em;
+}
+.punto{
+
+}
 
