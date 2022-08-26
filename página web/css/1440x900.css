@@ -56,4 +56,9 @@
     .momo{
         width: 10em;
     }
+    /* Galería */
+    .carrousel {
+        margin-top: 0%;
+        padding-top: 10em;
+    }
 }
