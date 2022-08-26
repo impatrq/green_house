@@ -233,3 +233,30 @@ h1{
 .hid {
     display: none;
 }
+/* Nosotros */
+.nosotros_main {
+    height: calc(100vh - 5.550625em);
+    background-image: url(../img/Background_Guias.png);
+}
+.contenido_nosotros{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.contenido_nosotros .nosotros {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: none;
+    border-radius: 2em;
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 1em;
+
+}
+.alinear {
+    display: flex;
+    justify-content: center;
+}
