@@ -82,6 +82,9 @@ body{
     font-size: 1.85em;
     color:#419E5B;
 }
+.item:active{
+    color: var(--verde);
+}
 .btn-primary {
     background-color: #419E5B;
     color: white;

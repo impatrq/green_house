@@ -1,4 +1,4 @@
-@media (min-width:375px) and (max-width:767px){
+@media (min-width:360px) and (max-width:767px){
     .slogan{
         margin: 5em auto;
         font-size: 0.75em;
@@ -32,41 +32,52 @@
         justify-content: center;
     }
    .btnlap{
-    border-radius: 2em;
-    font-size: 1.5em;
-    margin-top: 1em;
-    color: #419E5B;
-    padding: 0.37em 0.75em;
-    border-style: initial;
-    width: 75%;
+        border-radius: 2em;
+        font-size: 1.5em;
+        margin-top: 1em;
+        color: #419E5B;
+        padding: 0.37em 0.75em;
+        border-style: initial;
+        width: 75%;
    }
    .btnlap:hover{
-    background-color: #419E5B;
-    color: white;
-    border-color: white;
-    border-style: double;
+        background-color: #419E5B;
+        color: white;
+        border-color: white;
+        border-style: double;
    }
    .main-guia{
-    width: 100%;
-    background-color: #419E5B;
-    height: fit-content;
+        width: 100%;
+        background-color: #419E5B;
+        height: fit-content;
    }
    .guia-1{
-    margin: 0 auto;
-    border: none;
-    border-radius: 1em;
-    background-color: rgba(13, 101, 38, 0.25);
-    width: fit-content;
-    text-align: center;
-    padding: 1em;
-    font-size: 1.4em;
+        margin: 0 auto;
+        border: none;
+        border-radius: 1em;
+        background-color: rgba(13, 101, 38, 0.25);
+        width: fit-content;
+        text-align: center;
+        padding: 1em;
+        font-size: 1.4em;
    }
    .cont_guia{
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 1em;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-gap: 1em;
    }
    .momo{
-    width: 8em;
+        width: 8em;
+   }
+   /* Nosotros */
+   .nosotros_main {
+        height: fit-content;
+   }
+   .contenido_nosotros {
+        flex-direction: column;
+   }
+   .nosotros {
+        margin-top: 2em;
+        margin-bottom: 2em;
    }
 }
