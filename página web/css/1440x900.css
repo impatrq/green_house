@@ -1,38 +1,44 @@
 @media (min-width:1400px) {
-    main{
+    main {
         background-image: url('../img/Background_Guias.png');
     }
-    
+
     .description {
         margin: 2.5em 5.75em 0 5.75em;
         padding: 0;
         font-size: 1.75em;
     }
-    .navipad{
+
+    .navipad {
         visibility: collapse;
         height: 6.25em;
     }
-    .navlap{
+
+    .navlap {
         width: 100%;
     }
-    .btnlap{
+
+    .btnlap {
         display: none;
     }
 
     /* Comienzo de guia.html */
 
-    .text{
+    .text {
         margin-top: 10%;
         /*font-size: 1em;*/
         padding: 0 1em;
     }
+
     .text h2 {
         font-size: 1.5em;
     }
+
     .text p {
         font-size: 0.75em;
     }
-    .guia-1{
+
+    .guia-1 {
         height: 75%;
         border-radius: 2em;
         margin: 5em auto;
@@ -41,20 +47,22 @@
         background-color: rgba(13, 101, 38, 0.25);
         border: none;
     }
-    .cont_guia{
+
+    .cont_guia {
 
         /*width: 100vw;
         display: flex;
         justify-content: space-between;
         padding: 0 2em;*/
-        
+
         width: 100vw;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 10em;
         padding: 0 15em;
     }
-    .momo{
+
+    .momo {
         width: 10em;
     }
     /*galeria*/
