@@ -10,10 +10,12 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <link rel="preload" href="css/styles.css" as="style">
         <link rel="preload" href="css/1440x900.css" as="style">
+        <link rel="preload" href="css/1024x768.css" as="style">
         <link rel="preload" href="css/768x1024.css" as="style">
         <link rel="preload" href="css/375x812.css" as="style">
         <link rel="stylesheet" href="css/styles.css" as="style">
         <link rel="stylesheet" href="css/1440x900.css" as="style">
+        <link rel="stylesheet" href="css/1024x768.css" as="style">
         <link rel="stylesheet" href="css/768x1024.css" as="style">
         <link rel="stylesheet" href="css/375x812.css" as="style">
         <link rel="icon" href="img/favicon.ico">
@@ -21,16 +23,16 @@
     </head>
 <body>
     <header>
-        <nav class="navbar bg-light tamaño">
+        <nav class="navbar bg-light tamaño navlap">
             <div class="nav-logo">
                 <a class="navbar-brand" href="index.html">
                     <img src="img/grinja.png" alt="logo">
                 </a>
             </div>
             <div class="container">
-                <a class="item" href="#">Nosotros</a>
+                <a class="item" href="nosotros.html">Nosotros</a>
                 <a class="item" href="guia.html">Guías</a>
-                <a class="item" href="#">Galería</a>
+                <a class="item" href="galeria.html">Galería</a>
                 <a class="item" href="contacto.html">Contacto</a>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Forma parte</button>
             </div>
@@ -55,7 +57,7 @@
                         <a class="nav-link" href="guia.html">Guías</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Galería</a>
+                        <a class="nav-link" href="galeria.html">Galería</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="contacto.html">Contacto</a>
@@ -66,7 +68,7 @@
             </div>
           </nav>
     </header>
-    <main>
+    <main class="main-guia">
         <div class="cont_guia">
             <div class="guia-1">
                 <img src="img/momo.PNG" alt="momo" class="momo">

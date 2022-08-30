@@ -12,7 +12,7 @@ html{
 body{
     font-family: 'Jost', sans-serif;
 }
-main{
+.hero{
     background-color: var(--verde);
     height: calc(100vh - 6.25em);
     border: 0.0625em white;
@@ -82,6 +82,9 @@ main{
     font-size: 1.85em;
     color:#419E5B;
 }
+.item:active{
+    color: var(--verde);
+}
 .btn-primary {
     background-color: #419E5B;
     color: white;
@@ -102,11 +105,28 @@ main{
     height: fit-content;
     color: white;
     text-align: center;
-    display: block;
 }
 .momo{
     padding-top: 1.5625em;
     width: 15.625em;
+}
+.main-guia{
+    height: calc(100vh - 6.25em);
+}
+.btnguia{
+    border-radius: 2em;
+    font-size: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    color: #419E5B;
+    padding: 0.37em 0.75em;
+    border-style: initial;
+}
+.btnguia:hover{
+    background-color: #419E5B;
+    color: white;
+    border-color: white;
+    border-style: double;
 }
 /* Contacto */
 .contacto_main{
@@ -115,6 +135,8 @@ main{
     justify-content: center;
     align-items: center;
     position: relative;
+    background-image: url(../img/Background_Guias.png);
+    height: calc(100vh - 6.25em);
 }
 /*.form_cont{
     width: 75%;
@@ -160,89 +182,84 @@ h1{
     height: 1.5em;
     border-radius: 1em;
     padding: 2em;
+    font-size: 1.3em;
 }
 .campo-text-mensaje{
     border: none;
     width: 75%;
     border-radius: 1em;
     padding: 2em;
+    font-size: 1.3em;
 }
 #redes{
     margin-top: 2.5em;
 }
-
-.guia-1{
-    border: 1px solid;
-    margin-top: 6.25em;
+#contacto-title{
+    font-size: 4em;
+}
+/* galeria */
+.galeria_main{
+    height: 53em;
+}
+.carrousel{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
     height: fit-content;
-    color: white;
-    text-align: center;
-    display: block;
+    width: 100%;
+    margin-top: 5em;
 }
-.momo{
-    padding-top: 1.5625em;
-    width: 15.625em;
+.carrousel .img{
+    -webkit-box-shadow: 5px 5px 50px 27px #000000; 
+    box-shadow: 5px 5px 50px 27px #000000;  
+    border: none;
+    border-radius: 2em;
+    width: calc(100% / 3);
+    height: 20em;
 }
-/* Contacto */
-.contacto_main{
+.puntos{
+    display:flex;
+    flex-direction: row nowrap;
+    justify-content: space-between;
+    width: 25%;
+    border-color: black;
+    border: 1px solid;
+    padding: 0%;
+    margin-top: 2em;
+}
+.punto{
+    font-size: 2em;
+    list-style-type: none;
+}
+
+.hid {
+    display: none;
+}
+/* Nosotros */
+.nosotros_main {
+    height: calc(100vh - 5.550625em);
+    background-image: url(../img/Background_Guias.png);
+}
+.contenido_nosotros{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.contenido_nosotros .nosotros {
+    width: 75%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
-}
-/*.form_cont{
-    width: 75%;
-    margin: 0 auto;
-    height: 100%;
-    padding-top: 2em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 2em;
-    border-bottom-left-radius: 0em;
-    border-bottom-right-radius: 0em;
-    background-color: rgba(0, 0, 0, 0.25); 
-}
-*/
-.formulario{
-    padding: 5em;
-    margin-top: 1em;
-    width: min( 60em, 100%);
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.25);
-    border-radius: 2em;
-    border-bottom-left-radius: 0em;
-    border-bottom-right-radius: 0em;
-    position: absolute;
-    bottom: 0;
-    top: 12em;
-}
-h1{
-    font-size: 3em;
     color: white;
-    font-weight: lighter;
-    position: absolute;
-    top: 1.5em;
-}
-.campo{
-    margin-bottom: 1em;
-    width: 100%;
-}
-.campo-text{
     border: none;
-    width: 75%;
-    height: 1.5em;
-    border-radius: 1em;
-    padding: 2em;
-}
-.campo-text-mensaje{
-    border: none;
-    width: 75%;
-    border-radius: 1em;
-    padding: 2em;
-}
-#redes{
-    margin-top: 2.5em;
-}
+    border-radius: 2em;
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 1em;
 
+}
+.alinear {
+    display: flex;
+    justify-content: center;
+}

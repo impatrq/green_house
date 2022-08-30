@@ -1,4 +1,4 @@
-@media (min-width:768px ) and (max-width:1199px){
+@media (min-width:768px) and (max-width:1199px){
     .slogan{
         margin: 3em 0 0 0;
         font-size: 0.75em;
@@ -36,10 +36,38 @@
         border-style: initial;
         width: 75%;
        }
-       .btnlap:hover{
+    .btnlap:hover{
         background-color: #419E5B;
         color: white;
         border-color: white;
         border-style: double;
-       }
     }
+    /* Guia */
+    .main-guia{
+        width: 100%;
+        background-image: url(../img/Background_Guias.png);
+    }
+    .cont_guia{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 3em;
+    }
+    .guia-1{
+        height: 75%;
+        border-radius: 2em;
+        margin: 5em auto;
+        width: 12em;
+        font-size: 1.25em;
+        background-color: rgba(13, 101, 38, 0.25);
+        border: none;
+    }
+    .momo{
+        width: 10em;
+    }
+    .text{
+        padding: 0.5em;
+    }
+    .contenedor{
+        font-size: 0.8em;
+    }
+}
