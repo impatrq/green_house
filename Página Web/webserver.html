@@ -25,7 +25,7 @@
 
         main {
             height: 100vh;
-            background-image: url(img/Background_Guias.png);
+            background-image: url("https://i.imgur.com/nZm32Ih.png");
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -34,7 +34,7 @@
 
         .contenedor {
             border-radius: 5rem;
-            width: 60%;
+            max-width: fit-content;
             height: fit-content;
             padding: 0 5% 5% 5%;
             background-color: rgba(0, 0, 0, 0.2);
@@ -48,13 +48,13 @@
         .contenedor-variables {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
+            grid-gap: 1rem;
             font-size: 1.5rem;
             color: white;
         }
 
         label {
             display: inline;
-            width: 20%;
             margin-left: 0;
         }
 
@@ -73,6 +73,19 @@
             font-weight: lighter;
         }
 
+        .datos {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            
+            .contenedor-variables {
+                display: flex;
+                flex-direction: column;
+            }
+        }
     </style>
     <title>Mi invernadero</title>
 </head>
@@ -94,7 +107,7 @@
                 <div class="datos"><label for="valvula">Electroválvula</label><meter id="valvula"></meter></div>
                 <div class="datos"><label for="riego">Última vez regado</label><meter id="riego"></meter></div>
                 <div class="datos"><label for="alertas">Alertas (?)</label><meter id="alertas"></meter></div>
-                <div class="datos"><label for="temp">Apagar sistema</label><meter id="temp"></meter></div>
+                <div class="datos"><label for="apagar">Apagar sistema</label><meter id="apagar"></meter></div>
             </div>
         </div>
     </main>
