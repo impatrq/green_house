@@ -15,13 +15,8 @@ esp.osdebug(None)
 import gc
 gc.collect()
 
-def getDHT():
-    dht = DHT11(Pin(9))
-    dht.measure()
-    print(dht.temperature())
-
-ssid = 'Casa 2.4'
-password = '24091999Juan'
+ssid = "Red Alumnos"
+password = ""
 
 station = network.WLAN(network.STA_IF)
 
@@ -46,4 +41,4 @@ print(networkRslt)
 print(network[0])
 lcdInit(network[0])                                 #ifconfig() devuelve una tupla, con [0] accedo a la IP ADDRESS
 led = Pin(2, Pin.OUT)
-led.on()
+led.on()       
