@@ -27,21 +27,50 @@
             height: 100vh;
             background-image: url(img/Background_Guias.png);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
         .contenedor {
-            text-align: center;
+            border-radius: 5rem;
+            width: 60%;
+            height: fit-content;
+            padding: 0 5% 5% 5%;
+            background-color: rgba(0, 0, 0, 0.2);
         }
 
-        .contenedor h1 {
+        .contenedor h2 {
             color: white;
+            text-align: center;
             font-size: 2.5rem;
         }
         .contenedor-variables {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        label {
+            display: inline;
+            width: 20%;
+            margin-left: 0;
+        }
+
+        meter {
+            margin-left: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-weight: lighter;
         }
 
     </style>
@@ -49,13 +78,23 @@
 </head>
 <body>
     <main>
+        <h1>Mi invernadero</h1>
         <div class="contenedor">
-            <h1>Mi invernadero</h1>
+            <h2>Datos</h2>
             <div class="contenedor-variables">
+                <!--<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nam sed placeat, assumenda dolores eveniet minus, reiciendis laborum fugit incidunt distinctio, iusto cumque aperiam sint repellat illo esse quidem vel.</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nam sed placeat, assumenda dolores eveniet minus, reiciendis laborum fugit incidunt distinctio, iusto cumque aperiam sint repellat illo esse quidem vel.</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nam sed placeat, assumenda dolores eveniet minus, reiciendis laborum fugit incidunt distinctio, iusto cumque aperiam sint repellat illo esse quidem vel.</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nam sed placeat, assumenda dolores eveniet minus, reiciendis laborum fugit incidunt distinctio, iusto cumque aperiam sint repellat illo esse quidem vel.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nam sed placeat, assumenda dolores eveniet minus, reiciendis laborum fugit incidunt distinctio, iusto cumque aperiam sint repellat illo esse quidem vel.</p>
+                -->
+                <div class="datos"><label for="temp">Temperatura ambiente</label><meter id="temp"></meter></div>
+                <div class="datos"><label for="hum">Humedad ambiente</label><meter id="hum"></meter></div>
+                <div class="datos"><label for="hum_tierra">Humedad de la tierra</label><meter id="hum_tierra"></meter></div>
+                <div class="datos"><label for="lum">Luminosidad</label><meter id="lum"></meter></div>
+                <div class="datos"><label for="valvula">Electroválvula</label><meter id="valvula"></meter></div>
+                <div class="datos"><label for="riego">Última vez regado</label><meter id="riego"></meter></div>
+                <div class="datos"><label for="alertas">Alertas (?)</label><meter id="alertas"></meter></div>
+                <div class="datos"><label for="temp">Apagar sistema</label><meter id="temp"></meter></div>
             </div>
         </div>
     </main>
