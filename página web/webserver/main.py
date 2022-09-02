@@ -1,6 +1,6 @@
 from hashlib import sha1
 import socket
-from dht import DHT11
+import dht
 from machine import Pin, ADC
 from time import sleep
 import _thread
@@ -8,10 +8,11 @@ import _thread
 adcLDR1 = ADC(Pin(34))
 adcLDR2 = ADC(Pin(39))
 adcHL = ADC(Pin(36))
+dhtSensor = dht.DHT11(Pin(9))
+
 
 humedadSuelo = ""
-ldr1Oscuro = False
-ldr2Oscuro = False
+ldrEstado = ""
 
 lock = _thread.allocate_lock()
 
@@ -37,42 +38,45 @@ def setNetwork():
 
 def getSensors():
     lock.acquire()
-    print("Inicializando sensores")
+    print("Inicializando sensores...")
     getLDR()
     getHL()
+    getDHT()
     lock.release()
 
 def getLDR():
-    global ldr1Oscuro
-    global ldr2Oscuro
+    global ldrEstado
     ldrRead1 = adcLDR1.read() * (3.3/4096)
     #print("El valor de tensión del LDR es: {:.2f}" .format(ldrRead1))
     RLDR1 = (ldrRead1 * 10000)/(3.3 - ldrRead1)
     #print("El valor de la resistencia del LDR es: {:.0f}" .format(RLDR1))
     
     ldrRead2 = adcLDR2.read() * (3.3/4096)
-    print("El valor de tensión del LDR es: {:.2f}" .format(ldrRead2))
+    #print("El valor de tensión del LDR es: {:.2f}" .format(ldrRead2))
     RLDR2 = (ldrRead2 * 10000)/(3.3 - ldrRead2)
-    print("El valor de la resistencia del LDR es: {:.0f}" .format(RLDR2))    
+    #print("El valor de la resistencia del LDR es: {:.0f}" .format(RLDR2))    
     
     # 40952430 está oscuro (full)
     # 1000 ya está iluminado (full)
 
-    if(RLDR1 > 2000):
-        print("LDR 1: Oscuro, iluminar")
-        ldr1Oscuro = True
+    ldrPromedio = (RLDR1 + RLDR2) / 2
+
+    if(ldrPromedio > 2000):
+        ldrEstado = " Oscuro"
     else:
-        print("LDR 1: Iluminado")
-        ldr1Oscuro = False
+        ldrEstado = " Iluminado"
     sleep(1)
-    
-    if(RLDR2 > 2000):
-        print("LDR 2: Oscuro, iluminar")
-        ldr2Oscuro = True
-    else:
-        print("LDR 2: Iluminado")
-        ldr2Oscuro = False
-    sleep(1)
+
+def getDHT():
+    try:
+        sleep(2)
+        dhtSensor.measure()
+        temp = measure.temperature()
+        humidity = measure.humidity()
+        print("Temperature: ",temp)
+        print("Humidity: ",humidity)
+    except OSError as e:
+        print("DHT error")
 
 def getHL():
     adcHL.atten(ADC.ATTN_11DB)
@@ -80,12 +84,10 @@ def getHL():
     sleep(1)
     global humedadSuelo
     humedadSuelo = str(HLRead)
-    print(humedadSuelo)
         
 def webPage():
     global humedadSuelo
-    global ldr1Oscuro
-    global ldr2Oscuro
+    global ldrEstado
     html = f"""
             <!DOCTYPE html>
             <html lang="es">
@@ -104,7 +106,7 @@ def webPage():
 
                     *, *:before, *:after {{
                         box-sizing: inherit;
-                     }}
+                    }}
 
                     body {{
                         margin: 0%;
@@ -114,7 +116,7 @@ def webPage():
 
                     main {{
                         height: 100vh;
-                        background-image: url(img/Background_Guias.png);
+                        background-image: url("https://i.ibb.co/C8Q6ddJ/Background-Guias.png");
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
@@ -122,10 +124,13 @@ def webPage():
                     }}
 
                     .contenedor {{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
                         border-radius: 5rem;
-                        width: 60%;
+                        max-width: fit-content;
                         height: fit-content;
-                        padding: 0 5% 5% 5%;
+                        padding: 0 5% 0 5%;
                         background-color: rgba(0, 0, 0, 0.2);
                     }}
 
@@ -137,13 +142,13 @@ def webPage():
                     .contenedor-variables {{
                         display: grid;
                         grid-template-columns: repeat(2, 1fr);
+                        grid-gap: 0 1rem;
                         font-size: 1.5rem;
                         color: white;
                     }}
 
                     label {{
                         display: inline;
-                        width: 20%;
                         margin-left: 0;
                     }}
 
@@ -161,56 +166,63 @@ def webPage():
                     h2 {{
                         font-weight: lighter;
                     }}
+
+                    .datos {{
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                    }}
+                    
+                    #boton {{
+                        margin-top: 2rem;
+                        margin-bottom: 2rem;
+                    }}
+                        
+                    #boton button {{
+                        border: none;
+                        border-radius: 1rem;
+                        padding: 1rem;
+                        color: #347e49;
+                        font-size: 1rem;
+                        font-weight: bolder;
+                        cursor:pointer;
+                    }}
+                    
+                    .datos p {{
+                        margin: 0;
+                    }}
+
+                    @media (max-width: 768px) {{
+                        
+                        .contenedor-variables {{
+                            display: flex;
+                            flex-direction: column;
+                        }}
+                    }}
                 </style>
                 <title>Mi invernadero</title>
             </head>
-                    <body>
-                        <main>
-                            <h1>Mi invernadero</h1>
-                            <div class="contenedor">
-                                <h2>Datos</h2>
-                                <div class="contenedor-variables">
-                                    <!--<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nam sed placeat, assumenda dolores eveniet minus, reiciendis laborum fugit incidunt distinctio, iusto cumque aperiam sint repellat illo esse quidem vel.</p>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nam sed placeat, assumenda dolores eveniet minus, reiciendis laborum fugit incidunt distinctio, iusto cumque aperiam sint repellat illo esse quidem vel.</p>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nam sed placeat, assumenda dolores eveniet minus, reiciendis laborum fugit incidunt distinctio, iusto cumque aperiam sint repellat illo esse quidem vel.</p>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nam sed placeat, assumenda dolores eveniet minus, reiciendis laborum fugit incidunt distinctio, iusto cumque aperiam sint repellat illo esse quidem vel.</p>
-                                    -->
-                                    <div class="datos">
-                                        <label for="temp">Temperatura ambiente</label>
-                                        <meter id="temp"></meter>
-                                    </div>
-                                    <div class="datos">
-                                        <label for="hum">Humedad ambiente</label>
-                                        <meter id="hum"></meter>
-                                    </div>
-                                    <div class="datos">
-                                        <label for="hum_tierra">Humedad de la tierra</label>
-                                        <meter id="hum_tierra"></meter>
-                                    </div>
-                                    <div class="datos">
-                                        <label for="lum">Luminosidad</label>
-                                        <meter id="lum"></meter>
-                                    </div>
-                                    <div class="datos">
-                                        <label for="valvula">Electroválvula</label>
-                                        <meter id="valvula"></meter>
-                                    </div>
-                                    <div class="datos">
-                                        <label for="riego">Última vez regado</label>
-                                        <meter id="riego"></meter>
-                                    </div>
-                                    <div class="datos">
-                                        <label for="alertas">Alertas (?)</label>
-                                        <meter id="alertas"></meter>
-                                    </div>
-                                    <div class="datos">
-                                        <label for="temp">Apagar sistema</label>
-                                        <meter id="temp"></meter>
-                                    </div>
-                                </div>
-                            </div>
-                        </main>
-                    </body>
+            <body>
+                <main>
+                    <h1>Mi invernadero</h1>
+                    <div class="contenedor">
+                        <h2>Datos</h2>
+                        <div class="contenedor-variables">
+                            <div class="datos"><label for="temp">Temperatura ambiente</label><meter id="temp"></meter></div>
+                            <div class="datos"><label for="hum">Humedad ambiente</label><meter id="hum"></meter></div>
+                            <div class="datos"><label for="hum_tierra">Humedad de la tierra</label><meter value= "{humedadSuelo}" id="hum_tierra"></meter></div>
+                            <div class="datos"><label for="lum">Luminosidad: </label><p>{ldrEstado}</p></div>
+                            <div class="datos"><label for="valvula">Electroválvula: </label><p></p></div>
+                            <div class="datos"><label for="riego">Última vez regado: </label><p></p></div>
+                            <div class="datos"><label for="alertas">Alertas: </label><p></p></div>
+                            <div class="datos"><label for="apagar">Apagar sistema: </label><p></p></div>
+                        </div>
+                        <div id= "boton">
+                            <a href="/update"><button>Actualizar Datos</button></a>
+                        </div>
+                    </div>
+                </main>
+            </body>
             </html>
             """
     return html
