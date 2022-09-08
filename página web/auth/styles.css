@@ -1,27 +1,44 @@
-#error-message {
-    visibility: hidden;
-    color: red;
-}
-
 .btn-primary {
     background-color: #419E5B;
     color: white;
     border-color: #419E5B;
-}
-
-.btn-outline-primary {
-    color: #419E5B;
-    border-color: #419E5B;
-}
-
-.btn-outline-primary:hover {
-    background-color: #419E5B;
-    color: white;
-    border-color: #419E5B;
+    margin: 0%;
 }
 
 .btn-primary:hover {
     background-color: white;
     color:  #419E5B;
     border-color:#419E5B;
+}
+
+.btn{
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 1.75em;
+    color:var(--verde);
+    font-size: 1.6875em;
+    text-decoration: none;
+    background-color:#419E5B;
+    color: white;
+}
+
+.btn-login {
+    border-radius: 1em;
+    text-decoration: none;
+    background-color: #419E5B;
+    color: white;
+    border: none;
+    padding: 0.5em;
+    font-size: 1.2em;
+}
+
+.btn-login-cerrar {
+    border-style: solid;
+    border-color: #419E5B;
+    border-radius: 1em;
+    background-color: white;
+    color: #419E5B;
+    padding: 0.5em;
+    font-size: 1em;
+    margin-right: 1.2em;
 }
