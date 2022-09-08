@@ -89,3 +89,14 @@ main {
     background-color: white;
     color: #419E5B;
 }
+
+.hid {
+    display: none; /* Clase para esconder el div de inicio/crear */
+}
+
+p {
+    margin: 0%;
+    text-align: center;
+    color: #419E5B;
+    font-size: 3rem;
+}
