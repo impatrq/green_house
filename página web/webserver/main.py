@@ -1,21 +1,25 @@
 from hashlib import sha1
-import socket
-import dht
-from machine import Pin, ADC
+from machine import Pin, ADC, Timer, RTC
 from time import sleep
-import _thread
+import _thread, dht, socket, ntptime
 
-adcLDR1 = ADC(Pin(34))
-adcLDR2 = ADC(Pin(39))
+#Init de sensores
+sensor = dht.DHT22(Pin(09))
+adcLDR1 = ADC(Pin(39))
+adcLDR2 = ADC(Pin(34))
 adcHL = ADC(Pin(36))
-dhtSensor = dht.DHT11(Pin(9))
+relayValvula = Pin(27, Pin.OUT)
+relayVentiladores = Pin(25, Pin.OUT)
+relayLuces = Pin(32, Pin.OUT)
 
-
+#Definicion variables
 humedadSuelo = ""
 ldrEstado = ""
+temp = ""
+hum = ""
 
 lock = _thread.allocate_lock()
-
+        
 def setNetwork():
     lock.acquire()
     print("Inicializando WebServer. Esperando Conexion...")
@@ -34,7 +38,9 @@ def setNetwork():
     conn.send('Connection: close\n\n')
     conn.sendall(response)
     conn.close()
-    lock.release() 
+    #tim0 =Timer(0)
+    #tim0.init(period=10000, mode=Timer.PERIODIC, callback=getEstados)         #Este timer se activa cada 1 hora (3600000 milisegundos)                                                            #de la humedad del suelo
+    lock.release()                                                             #para verificar el estado
 
 def getSensors():
     lock.acquire()
@@ -47,36 +53,20 @@ def getSensors():
 def getLDR():
     global ldrEstado
     ldrRead1 = adcLDR1.read() * (3.3/4096)
-    #print("El valor de tensión del LDR es: {:.2f}" .format(ldrRead1))
     RLDR1 = (ldrRead1 * 10000)/(3.3 - ldrRead1)
-    #print("El valor de la resistencia del LDR es: {:.0f}" .format(RLDR1))
+    print("El valor de la resistencia del LDR1 es: {:.0f}" .format(RLDR1))
     
-    ldrRead2 = adcLDR2.read() * (3.3/4096)
-    #print("El valor de tensión del LDR es: {:.2f}" .format(ldrRead2))
-    RLDR2 = (ldrRead2 * 10000)/(3.3 - ldrRead2)
-    #print("El valor de la resistencia del LDR es: {:.0f}" .format(RLDR2))    
-    
-    # 40952430 está oscuro (full)
-    # 1000 ya está iluminado (full)
+    ldrRead2 = adcLDR2.read() * (3.3/4096)         # 1000 ya está iluminado (full)
+    RLDR2 = (ldrRead2 * 10000)/(3.3 - ldrRead2)    # 40952430 está oscuro (full)
+    print("El valor de la resistencia del LDR2 es: {:.0f}" .format(RLDR2))
 
     ldrPromedio = (RLDR1 + RLDR2) / 2
-
+    print("El promedio es: ", ldrPromedio)
     if(ldrPromedio > 2000):
         ldrEstado = " Oscuro"
     else:
         ldrEstado = " Iluminado"
     sleep(1)
-
-def getDHT():
-    try:
-        sleep(2)
-        dhtSensor.measure()
-        temp = measure.temperature()
-        humidity = measure.humidity()
-        print("Temperature: ",temp)
-        print("Humidity: ",humidity)
-    except OSError as e:
-        print("DHT error")
 
 def getHL():
     adcHL.atten(ADC.ATTN_11DB)
@@ -84,10 +74,59 @@ def getHL():
     sleep(1)
     global humedadSuelo
     humedadSuelo = str(HLRead)
+    print("La humedad de suelo: " ,humedadSuelo)
         
-def webPage():
-    global humedadSuelo
+def getDHT():
+  global temp, hum
+  temp = hum = 0
+  try:
+    sensor.measure()
+    temp = sensor.temperature() 
+    hum = sensor.humidity()
+    temp = str(temp)
+    hum = str(hum)
+  except OSError as e:
+    return('Failed to read sensor.')
+
+def getEstados(timer):
+    watering()
+    lighting()
+    cooling()
+    
+def lighting():
     global ldrEstado
+    if(ldrEstado == false):
+        print("Debo iluminar")
+    else:
+        print("No debo iluminar")
+
+def watering():
+    optimalHumidity = 800
+    global humedadSuelo
+    if(humedadSuelo >= optimalHumidity):
+        print("Debo regar")
+        getTime()
+    else:
+        print("No debo regar")
+    
+def cooling():
+    optimalTemp = 20
+    global temp
+    if(temp > optimalTemp):
+        print("Hace calor")
+    elif(temp == optimalTemp):
+        print("No hacer nada")
+    else:
+        print("Hace frio")
+        
+def getTime():
+    rtc = RTC()
+    fecha = rtc.datetime()
+    fechaActual = fecha[4:6]
+    print(str(fechaActual))
+    
+def webPage():
+    global humedadSuelo, ldrEstado, temp, hum
     html = f"""
             <!DOCTYPE html>
             <html lang="es">
@@ -98,7 +137,7 @@ def webPage():
                 <link rel="preconnect" href="https://fonts.googleapis.com">
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
                 <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
-                <link rel="icon" href="img/favicon.ico"> 
+                <link rel="icon" href="https://i.ibb.co/BVqKJ0z/Frame-22-1.png"> 
                 <style>
                     html {{
                         box-sizing: border-box;
@@ -189,9 +228,9 @@ def webPage():
                     }}
                     
                     .datos p {{
-                        margin: 0;
+                        margin: 0 0 0 1rem;
                     }}
-
+                    
                     @media (max-width: 768px) {{
                         
                         .contenedor-variables {{
@@ -199,6 +238,7 @@ def webPage():
                             flex-direction: column;
                         }}
                     }}
+                    
                 </style>
                 <title>Mi invernadero</title>
             </head>
@@ -208,14 +248,11 @@ def webPage():
                     <div class="contenedor">
                         <h2>Datos</h2>
                         <div class="contenedor-variables">
-                            <div class="datos"><label for="temp">Temperatura ambiente</label><meter id="temp"></meter></div>
-                            <div class="datos"><label for="hum">Humedad ambiente</label><meter id="hum"></meter></div>
-                            <div class="datos"><label for="hum_tierra">Humedad de la tierra</label><meter value= "{humedadSuelo}" id="hum_tierra"></meter></div>
-                            <div class="datos"><label for="lum">Luminosidad: </label><p>{ldrEstado}</p></div>
-                            <div class="datos"><label for="valvula">Electroválvula: </label><p></p></div>
-                            <div class="datos"><label for="riego">Última vez regado: </label><p></p></div>
-                            <div class="datos"><label for="alertas">Alertas: </label><p></p></div>
-                            <div class="datos"><label for="apagar">Apagar sistema: </label><p></p></div>
+                            <div class="datos"><label for="temp">Temperatura ambiente</label><meter id="temp" value ="{temp}" min="0" max="50"></meter><p>{temp + " °C"}</p></div>
+                            <div class="datos"><label for="hum">Humedad ambiente</label><meter id="hum" value="{hum}" min="0" max="100"></meter><p>{hum + " %"}</p></div>
+                            <div class="datos"><label for="hum_tierra">Humedad de la tierra</label><meter optimum="1000" high="3000" min="1" max="4095" value= "{humedadSuelo}" id="hum_tierra"></meter></div>
+                            <div class="datos"><label for="lum">Luminosidad:</label><p>{ldrEstado}</p></div>
+                            <div class="datos"><label for="riego">Última vez regado:</label><p></p></div>
                         </div>
                         <div id= "boton">
                             <a href="/update"><button>Actualizar Datos</button></a>
