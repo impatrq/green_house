@@ -91,6 +91,21 @@ body{
     border-color: #419E5B;
     margin: 0%;
 }
+
+.btn-secondary {
+    background-color: white;
+    color: #419E5B;
+    border-color: white;
+    margin: 0%;
+}
+
+.btn-secondary:hover{
+    background-color: #419E5B;
+    color: white;
+    border-color: white;
+    margin: 0%;
+}
+
 .nav-logo img{
     width: 9.5em;
     margin-left: 2em;

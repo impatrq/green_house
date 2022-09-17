@@ -72,17 +72,18 @@
     <main class="contacto_main">
       <h1 id="contacto-title">Contactanos!</h1>
       <!--<div class="form_cont">-->
-        <form class="formulario">
+        <form class="formulario" action="https://formsubmit.io/send/greenhouse.impa@gmail.com" method="POST"> <!--API: FormSubmit // Forma facil para manejar los mensajes -->
           <fieldset>
               <div class="campo">
-                <input type="nombre" placeholder="Nombre" class="campo-text">
+                <input name="name" type="nombre" placeholder="Nombre" class="campo-text">
               </div>
               <div class="campo">
-                <input type="email" placeholder="Email" class="campo-text">
+                <input name="email" type="email" placeholder="Email" class="campo-text">
               </div>
               <div class="campo">
-                <input placeholder="Mensaje" class="campo-text-mensaje"></input>
+                <input name="message" placeholder="Mensaje" class="campo-text-mensaje"></input>
               </div>
+              <input class="btn btn-secondary" type="submit" value="Enviar">
               <div id="redes">
                 <img src="img/instagram.svg" alt="ig" width="50px"> <!--cambiar luego en estilos-->
                 <img src="img/linkedin.svg" alt="linkedin" width="50px">
