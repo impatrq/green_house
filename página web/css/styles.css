@@ -263,3 +263,109 @@ h1{
     display: flex;
     justify-content: center;
 }
+
+/* CSS para modal auth */
+
+.contenedor-sesion {
+    max-width: 100vw;
+    margin: 0 auto;
+    background-image: url(../auth/back_logo.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 4rem;
+    padding: 2rem;
+}
+
+.contenedor-sesion__inputs {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 75%;
+}
+
+.contenedor-sesion__inputs input {
+    border: 1px solid;
+    border-color: gray;
+    border-radius: 5rem;
+    padding: 0.5rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+}
+
+h1 {
+    font-weight: lighter;
+    text-align: center;
+    color: #419E5B;
+    margin-top: 0%;
+}
+
+#desvio-crear {
+    color: #419E5B;
+    font-size: 1rem;
+    text-align: center;
+}
+
+#desvio-crear a {
+    text-decoration: none;
+    color: #6992FA;
+}
+
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.botones button {
+    border: none;
+    border-radius: 1.5rem;
+    background-color: #419E5B;
+    color: white;
+    font-family: 'Jost', sans-serif;
+    font-size: 1.2rem;
+    padding: 0.7rem;
+}
+
+#boton-cerrar {
+    border: 1px;
+    border-style: solid;
+    background-color: white;
+    color: #419E5B;
+}
+
+.hid {
+    display: none; /* Clase para esconder el div de inicio/crear */
+}
+
+.contenedor-crear-sesion {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.movido {
+    position: absolute;
+    top:0%;
+    left: 12%;
+}
+
+.title {
+    text-align: center;
+    color: #419E5B;
+    font-size: 2rem;
+    margin: 1rem 0 2rem 0;
+}
+
+#desvio-h2 {
+    font-size: 1.2rem;
+    margin: 0%;
+    white-space: nowrap;
+    font-weight: lighter;
+}
+
+.botones-crear-sesion {
+    margin-top: -1.2rem;
+}
