@@ -1,6 +1,6 @@
-@media (min-width:360px) and (max-width:767px){
+@media (max-width:767px){
     .slogan{
-        margin: 5em auto;
+        margin: 4em auto;
         font-size: 0.75em;
     }
     .navlap{
