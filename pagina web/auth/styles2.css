@@ -49,7 +49,7 @@ main {
     width: 100%;
 }
 
-h1 {
+.contenedor-sesion h1 {
     font-weight: lighter;
     text-align: center;
     color: #419E5B;
@@ -94,32 +94,9 @@ h1 {
     display: none; /* Clase para esconder el div de inicio/crear */
 }
 
-.contenedor-crear-sesion {
-    position: relative;
-    width: fit-content;
-    margin: 0 auto;
-}
-
-.movido {
-    position: absolute;
-    top:0%;
-    left: 12%;
-}
-
-.title {
+p {
+    margin: 0%;
     text-align: center;
     color: #419E5B;
-    font-size: 2rem;
-    margin: 1rem 0 2rem 0;
-}
-
-#desvio-h2 {
-    font-size: 1.2rem;
-    margin: 0%;
-    white-space: nowrap;
-    font-weight: lighter;
-}
-
-.botones-crear-sesion {
-    margin-top: -1.2rem;
+    font-size: 3rem;
 }
