@@ -94,13 +94,6 @@ h1 {
     display: none; /* Clase para esconder el div de inicio/crear */
 }
 
-p {
-    margin: 0%;
-    text-align: center;
-    color: #419E5B;
-    font-size: 3rem;
-}
-
 .contenedor-crear-sesion {
     position: relative;
     width: fit-content;
