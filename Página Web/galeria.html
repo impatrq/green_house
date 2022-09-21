@@ -4,7 +4,6 @@
 <head>
     <title>Galería</title>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script type="module" src="js/app.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet"> 
@@ -20,7 +19,6 @@
     <link rel="stylesheet" href="css/1024x768.css" as="style">
     <link rel="stylesheet" href="css/768x1024.css" as="style">
     <link rel="stylesheet" href="css/375x812.css" as="style">
-
     <script src="js/galeria.js"></script>
 
 </head>
@@ -37,15 +35,15 @@
             <a class="item" href="guia.html">Guías</a>
             <a class="item" href="galeria.html">Galería</a>
             <a class="item" href="contacto.html">Contacto</a>
-            <button id="botonAuth" onclick="click()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Forma parte</button>        </div>
-      </nav>
+            <button id="boton-Auth" type="button" class="btn btn-primary">Forma parte</button>
+          </nav>
       <nav class="navbar bg-light fixed-top navipad">
         <div class="container-fluid">
           <a class="navbar-brand" href="index.html"><img src="img/grinja.png" alt="ipadlogo" id="ipadlogo"></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          <button class="navbar-toggler" type="button" data-bs-backdrop="false" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-backdrop="false" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
               <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><a href="index.html" id="ham_title">GreenHouse</a></h5>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -53,7 +51,7 @@
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="#">Nosotros</a>
+                  <a class="nav-link" aria-current="page" href="nosotros.html">Nosotros</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="guia.html">Guías</a>
@@ -63,6 +61,9 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="contacto.html">Contacto</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" id="boton-Auth-mobile">Forma Parte</a>
                   </li>
               </ul>
             </div>
@@ -86,5 +87,42 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
       <!--carrusel provisorio-->
     </main>
+    <div id="back_modal" class="hid">      
+      <div id="signInDiv" class="contenedor-iniciar-sesion hid">
+        <div class="mover">
+            <div class="contenedor-sesion__inputs">
+                <h1 class="title">Inicia Sesion GreenHouse</h1>
+                <input id="email-login" type="text" placeholder="Email" style="font-size: 1rem;">
+                <input id="password-login" type="password" placeholder="Contraseña" style="font-size: 1rem;">
+                <div id="desvio-crear">
+                    <h2 id="desvio-h2">En caso de no tener una cuenta, <a href="#" id="crear-Sesion-Anchor">crea una</a></h2>
+                </div>
+                <div class="botones botones-crear-sesion">
+                    <button id="boton-cerrar-signin">Cerrar</button>
+                    <button id="signin">Iniciar Sesión</button>
+                </div>
+            </div>
+        </div>
+            <img src="auth/back_logo.png" alt="modalfoto" class="img__modal">
+      </div>
+          <div id="signUpDiv" class="contenedor-crear-sesion hid">
+            <div class="mover">
+                <div class="contenedor-sesion__inputs">
+                    <h1 class="title">Forma parte de GreenHouse</h1>
+                    <input id="email" type="text" placeholder="Email" style="font-size: 1rem;">
+                    <input id="password" type="password" placeholder="Contraseña" style="font-size: 1rem;">
+                    <div id="desvio-crear">
+                        <h2 id="desvio-h2">Si ya tienes una cuenta, <a href="#" id="iniciar-Sesion-Anchor">inicia sesión</a></h2>
+                    </div>
+                    <div class="botones botones-crear-sesion">
+                        <button id="boton-cerrar-signup">Cerrar</button>
+                        <button id="signup">Crear sesión</button>
+                    </div>
+                </div>
+            </div>
+        <img src="auth/back_logo.png" alt="modalfoto" class="img__modal">
+      </div>
+    </div>
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
