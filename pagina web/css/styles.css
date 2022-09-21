@@ -66,6 +66,11 @@ body{
     border-color: #419E5B;
 }
 /* navlap content */
+
+.navlap {
+    z-index: 1;
+}
+
 .container{
     width: 62%;
     padding-left: 12%;
@@ -214,8 +219,17 @@ body{
 }
 /* galeria */
 .galeria_main{
-    height: 53em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/Background_Guias.png);
 }
+
 .carrousel{
     display: flex;
     flex-flow: column;
@@ -223,7 +237,6 @@ body{
     align-items: center;
     height: fit-content;
     width: 100%;
-    margin-top: 5em;
 }
 .carrousel .img{
     -webkit-box-shadow: 5px 5px 50px 27px #000000; 

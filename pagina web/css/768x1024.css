@@ -70,4 +70,8 @@
     .contenedor{
         font-size: 0.8em;
     }
+    /* galeria */
+    .carrousel .img {
+        width: 50%;
+    }
 }
