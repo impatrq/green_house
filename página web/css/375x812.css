@@ -80,4 +80,12 @@
         margin-top: 2em;
         margin-bottom: 2em;
    }
+   /* galeria */
+
+   .galeria_main {
+    height: 54.3rem;
+   }
+   .carrousel .img {
+    width: 85%;
+}
 }

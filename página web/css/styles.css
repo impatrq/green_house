@@ -200,6 +200,10 @@ body{
 /* galeria */
 .galeria_main{
     height: 53em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/Background_Guias.png);
 }
 .carrousel{
     display: flex;
@@ -208,7 +212,6 @@ body{
     align-items: center;
     height: fit-content;
     width: 100%;
-    margin-top: 5em;
 }
 .carrousel .img{
     -webkit-box-shadow: 5px 5px 50px 27px #000000; 

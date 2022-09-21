@@ -92,7 +92,6 @@
         display: flex;
         flex-direction: column;
         height: calc(100vh - 5.550625em);
-        background-image: url(../img/Background_Guias.png);
     }
 
 

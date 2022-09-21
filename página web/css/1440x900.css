@@ -68,10 +68,5 @@
     /*galeria*/
     .galeria_main{
         height: calc(100vh - 6.25em);
-    }
-    .carrousel{
-        margin-top: 0%;
-        padding-top: 10%;
-    }
-    
+    } 
 }
