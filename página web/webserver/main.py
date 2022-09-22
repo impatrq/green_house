@@ -22,10 +22,10 @@ relayVentiladores = Pin(25, Pin.OUT)
 relayLuces = Pin(32, Pin.OUT)
 
 #Definicion variables
-soilHumidity = ""
+soilHumidity = 0
 ldrState = ""
-temp = ""
-hum = ""
+temp = 0
+hum = 0
 
 lock = _thread.allocate_lock()                                  # El código tiene dos hilos, uno mide con los sensores, y el otro espera una conexion
                                                                 # de un socket. Ambos trabajan de manera independiente mediante locks (semaphores)
@@ -46,7 +46,8 @@ def setNetwork():
     conn.send('Content-Type: text/html\n')
     conn.send('Connection: close\n\n')
     conn.sendall(response)                                      # Envia el HTML
-    conn.close()                                                
+    conn.close()
+    print("Releasing lock from network...")
     lock.release()                                                             
 
 def getSensors():                                            # getSensors es una funcion que engloba todas las funciones que toman resultados de mediciones
@@ -69,7 +70,7 @@ def getLDR():
 
     ldrAverage = (RLDR1 + RLDR2) / 2                                                 # Calculo promedio de iluminacion entre ambos LDR // WIP
     print("Valor promedio LDRs: ", ldrAverage)
-    if(ldrAverage > 2000):
+    if(ldrAverage > 7000):
         ldrState = "Oscuro"
     else:
         ldrState = "Iluminado"
@@ -80,26 +81,22 @@ def getHL():
     HLRead= adcHL.read()                                                              # Valores de lectura con el ADC.
     sleep(1)
     global soilHumidity
-    soilHumidity = str(HLRead)
+    soilHumidity = HLRead
     print("La humedad de suelo: " ,soilHumidity)
         
 def getDHT():
     global temp, hum
     temp = hum = 0
     try:
-        sleep(2)
         sensor.measure()
         temp = sensor.temperature()
         hum = sensor.humidity()
         print('Temperature: %3.1f C' %temp)
         print('Humidity: %3.1f %%' %hum)
-        temp = str(temp)
-        hum = str(hum)
     except OSError as e:
         return('Failed to read sensor.')
 
-def getStates(timer):                                                                 # Esta es la funcion que el timer activa cada vez que se triggerea 
-    #                                                                                    el mismo, se trata de una funcion que pregunta por el estado de los sensores    
+def getStates(timer):                                                                 # Esta es la funcion que el timer activa cada vez que se triggerea mismo, se trata de una funcion que pregunta por el estado de los sensores    
     #getSensors()                                                                      # Se tiene que llamar a esta funcion para tomar datos recientes de los sensores y no desactualizados
     watering()                                                                        
     lighting()
@@ -113,21 +110,22 @@ def lighting():
         print("No debo iluminar")
 
 def watering():
-    optimalHumidity = 800
+    optimalHumidity = 2200
     global soilHumidity
-    if(float(soilHumidity) >= optimalHumidity):
+    print(soilHumidity)
+    if(int(soilHumidity) >= optimalHumidity):
         print("Debo regar")
         getTime()
     else:
         print("No debo regar")
+    soilHumidity = str(soilHumidity)
     
 def cooling():
     optimalTemp = 20
     global temp
-    floatTemp = float(temp)
-    if(floatTemp > optimalTemp):
+    if(int(temp) > optimalTemp):
         print("Hace calor")
-    elif(floatTemp == optimalTemp):
+    elif(int(temp) == optimalTemp):
         print("No hacer nada")
     else:
         print("Hace frio")
@@ -135,11 +133,17 @@ def cooling():
 def getTime():
     rtc = RTC()
     date = rtc.datetime()
-    currentDate = date[4:6]
-    print(str(currentDate))
-#     
+    currentDay = date[4]
+    currentMonth = date[6]
+    print(str(currentDay))
+    print(str(currentMonth))
+    print(str(date))
+    
 def webPage():
     global soilHumidity, ldrState, temp, hum
+    temp = str(temp)
+    hum = str(hum)
+    soilHumidity = str(soilHumidity)
     html = f"""
             <!DOCTYPE html>
             <html lang="es">
