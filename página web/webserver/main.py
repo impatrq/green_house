@@ -13,10 +13,10 @@ from time import sleep
 import _thread, dht, socket, ntptime
 
 #Init de sensores
-sensor = dht.DHT22(Pin(09))
+sensor = dht.DHT22(Pin(32))
 adcLDR1 = ADC(Pin(39))
 adcLDR2 = ADC(Pin(34))
-adcHL = ADC(Pin(36))
+adcHL = ADC(Pin(35))
 relayValvula = Pin(27, Pin.OUT)
 relayVentiladores = Pin(25, Pin.OUT)
 relayLuces = Pin(32, Pin.OUT)
@@ -84,20 +84,23 @@ def getHL():
     print("La humedad de suelo: " ,soilHumidity)
         
 def getDHT():
-  global temp, hum
-  temp = hum = 0
-  try:
-    sensor.measure()                                                                  
-    temp = sensor.temperature()                                                       # Lectura de temperatura
-    hum = sensor.humidity()                                                           # Lectura de humedad ambiente
-    temp = str(temp)                                        
-    hum = str(hum)
-  except OSError as e:
-    return('Failed to read sensor.')
+    global temp, hum
+    temp = hum = 0
+    try:
+        sleep(2)
+        sensor.measure()
+        temp = sensor.temperature()
+        hum = sensor.humidity()
+        print('Temperature: %3.1f C' %temp)
+        print('Humidity: %3.1f %%' %hum)
+        temp = str(temp)
+        hum = str(hum)
+    except OSError as e:
+        return('Failed to read sensor.')
 
 def getStates(timer):                                                                 # Esta es la funcion que el timer activa cada vez que se triggerea 
-    #                                                                                   el mismo, se trata de una funcion que pregunta por el estado de los sensores    
-    #getSensors()                                                                     # Se tiene que llamar a esta funcion para tomar datos recientes de los sensores y no desactualizados
+    #                                                                                    el mismo, se trata de una funcion que pregunta por el estado de los sensores    
+    #getSensors()                                                                      # Se tiene que llamar a esta funcion para tomar datos recientes de los sensores y no desactualizados
     watering()                                                                        
     lighting()
     cooling()
@@ -112,7 +115,7 @@ def lighting():
 def watering():
     optimalHumidity = 800
     global soilHumidity
-    if(soilHumidity >= optimalHumidity):
+    if(float(soilHumidity) >= optimalHumidity):
         print("Debo regar")
         getTime()
     else:
@@ -121,9 +124,10 @@ def watering():
 def cooling():
     optimalTemp = 20
     global temp
-    if(float(temp) > optimalTemp):
+    floatTemp = float(temp)
+    if(floatTemp > optimalTemp):
         print("Hace calor")
-    elif(float(temp) == optimalTemp):
+    elif(floatTemp == optimalTemp):
         print("No hacer nada")
     else:
         print("Hace frio")
@@ -133,7 +137,7 @@ def getTime():
     date = rtc.datetime()
     currentDate = date[4:6]
     print(str(currentDate))
-    
+#     
 def webPage():
     global soilHumidity, ldrState, temp, hum
     html = f"""

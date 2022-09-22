@@ -15,8 +15,8 @@ esp.osdebug(None)
 import gc
 gc.collect()
 
-ssid = "Red Alumnos"
-password = ""
+ssid = "Casa 2.4"
+password = "24091999Juan"
 
 station = network.WLAN(network.STA_IF)
 
@@ -39,6 +39,6 @@ network = station.ifconfig()
 networkRslt = 'Connection successful'
 print(networkRslt)
 print(network[0])
-lcdInit(network[0])                                 #ifconfig() devuelve una tupla, con [0] accedo a la IP ADDRESS
+#lcdInit(network[0])                                 #ifconfig() devuelve una tupla, con [0] accedo a la IP ADDRESS
 led = Pin(2, Pin.OUT)
 led.on()       
