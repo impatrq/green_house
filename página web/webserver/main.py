@@ -35,7 +35,8 @@ def setNetwork():
     conn, addr = s.accept()                                     # Espera una conexion mediante un socket
     print('Got a connection from %s' % str(addr))
     request = conn.recv(1024)
-    request = str(request)   
+    request = str(request)
+    print(request)
     update = request.find('/update')                            # Busca /update en URL     
        
     if update == 6:
@@ -57,6 +58,14 @@ def getSensors():                                            # getSensors es una
     getHL()
     getDHT()
     lock.release()
+    
+def getSensors2():                                            # getSensors es una funcion que engloba todas las funciones que toman resultados de mediciones                                          # Toma el lock para no sobre escribir/tomar mal datos
+    while True:
+        sleep(9)
+        print("Initializing sensors...")
+        getLDR()
+        getHL()
+        getDHT()
 
 def getLDR():
     global ldrState
@@ -97,7 +106,6 @@ def getDHT():
         return('Failed to read sensor.')
 
 def getStates(timer):                                                                 # Esta es la funcion que el timer activa cada vez que se triggerea mismo, se trata de una funcion que pregunta por el estado de los sensores    
-    #getSensors()                                                                      # Se tiene que llamar a esta funcion para tomar datos recientes de los sensores y no desactualizados
     watering()                                                                        
     lighting()
     cooling()
@@ -115,7 +123,7 @@ def watering():
     print(soilHumidity)
     if(int(soilHumidity) >= optimalHumidity):
         print("Debo regar")
-        getTime()
+        #getTime()
     else:
         print("No debo regar")
     soilHumidity = str(soilHumidity)
@@ -132,12 +140,12 @@ def cooling():
         
 def getTime():
     rtc = RTC()
-    date = rtc.datetime()
-    currentDay = date[4]
-    currentMonth = date[6]
-    print(str(currentDay))
-    print(str(currentMonth))
-    print(str(date))
+    ntptime.settime()
+    currentDate = rtc.datetime()
+    currentDay = currentDate[2]
+    currentMonth = currentDate[1]
+    print(currentDay)
+    print(currentMonth)
     
 def webPage():
     global soilHumidity, ldrState, temp, hum
@@ -302,3 +310,5 @@ while True:
         setNetwork()
         print("Hilo 1")
         _thread.start_new_thread(getSensors, ())
+        print("Hilo 2")
+        _thread.start_new_thread(getSensors2, ())
