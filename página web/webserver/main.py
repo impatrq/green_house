@@ -58,14 +58,7 @@ def getSensors():                                            # getSensors es una
     getHL()
     getDHT()
     lock.release()
-    
-def getSensors2():                                            # getSensors es una funcion que engloba todas las funciones que toman resultados de mediciones                                          # Toma el lock para no sobre escribir/tomar mal datos
-    while True:
-        sleep(9)
-        print("Initializing sensors...")
-        getLDR()
-        getHL()
-        getDHT()
+
 
 def getLDR():
     global ldrState
@@ -106,6 +99,9 @@ def getDHT():
         return('Failed to read sensor.')
 
 def getStates(timer):                                                                 # Esta es la funcion que el timer activa cada vez que se triggerea mismo, se trata de una funcion que pregunta por el estado de los sensores    
+    getLDR()
+    getHL()
+    getDHT()
     watering()                                                                        
     lighting()
     cooling()
@@ -303,12 +299,10 @@ s.bind(('', 80))
 s.listen(5)
 
 tim0 =Timer(0)                                                              # Este timer se activa cada 1 hora (3600000 milisegundos)  // 10000 ms TEST        
-tim0.init(period=10000, mode=Timer.PERIODIC, callback=getStates)            # para verificar el estado    
+tim0.init(period=30000, mode=Timer.PERIODIC, callback=getStates)            # para verificar el estado    
 
 while True:
         print("Hilo 0")  
         setNetwork()
         print("Hilo 1")
         _thread.start_new_thread(getSensors, ())
-        print("Hilo 2")
-        _thread.start_new_thread(getSensors2, ())
