@@ -1,149 +1,180 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet"> 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="preload" href="css/styles.css" as="style">
-    <link rel="preload" href="css/1440x900.css" as="style">
-    <link rel="preload" href="css/1024x768.css" as="style">
-    <link rel="preload" href="css/768x1024.css" as="style">
-    <link rel="preload" href="css/375x812.css" as="style">
-    <link rel="stylesheet" href="css/styles.css" as="style">
-    <link rel="stylesheet" href="css/1440x900.css" as="style">
-    <link rel="stylesheet" href="css/1024x768.css" as="style">
-    <link rel="stylesheet" href="css/768x1024.css" as="style">
-    <link rel="stylesheet" href="css/375x812.css" as="style">
-    <link rel="icon" href="img/favicon.ico">
-    <title>Nosotros</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="preload" href="css/styles.css" as="style">
+  <link rel="preload" href="css/1440x900.css" as="style">
+  <link rel="preload" href="css/1024x768.css" as="style">
+  <link rel="preload" href="css/768x1024.css" as="style">
+  <link rel="preload" href="css/375x812.css" as="style">
+  <link rel="stylesheet" href="css/styles.css" as="style">
+  <link rel="stylesheet" href="css/1440x900.css" as="style">
+  <link rel="stylesheet" href="css/1024x768.css" as="style">
+  <link rel="stylesheet" href="css/768x1024.css" as="style">
+  <link rel="stylesheet" href="css/375x812.css" as="style">
+  <link rel="icon" href="img/favicon.ico">
+  <title>Nosotros</title>
 </head>
+
 <body>
-    <header>
-        <nav class="navbar bg-light tamaño navlap">
-            <div class="nav-logo">
-                <a class="navbar-brand" href="index.html">
-                    <img src="img/grinja.png" alt="logo">
-                </a>
-            </div>
-            <div class="container">
-                <a class="item" href="nosotros.html">Nosotros</a>
-                <a class="item" href="guia.html">Guías</a>
-                <a class="item" href="galeria.html">Galería</a>
-                <a class="item" href="contacto.html">Contacto</a>
-                <button id="boton-Auth" type="button" class="btn btn-primary">Forma parte</button>
-            </div>
-          </nav>
-          <nav class="navbar bg-light fixed-top navipad">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="index.html"><img src="img/grinja.png" alt="ipadlogo" id="ipadlogo"></a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-backdrop="false" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><a href="index.html" id="ham_title">GreenHouse</a></h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                      <a class="nav-link" aria-current="page" href="nosotros.html">Nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="guia.html">Guías</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="galeria.html">Galería</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="contacto.html">Contacto</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#" id="boton-Auth-mobile">Forma Parte</a>
-                      </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </nav>
-    </header>
-    <main class="nosotros_main">
-            <div class="contenido_nosotros">
-                <div class="alinear">
-                    <div class="nosotros">
-                        <img src="img/favicon.ico" alt="" width="100em">
-                        <h2 id="nombre">Uriel</h2>
-                        <p id="sobreMi">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod totam rerum, optio, architecto recusandae, nemo eos harum sapiente quia molestiae fugit. Eveniet consequatur, illum explicabo aspernatur voluptas reprehenderit deleniti debitis.</p>
-                    </div>
-                </div>
-                
-                <div class="alinear">
-                    <div class="nosotros">
-                        <img src="img/favicon.ico" alt="" width="100em">
-                        <h2 id="nombre">Juan</h2>
-                        <p id="sobreMi">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod totam rerum, optio, architecto recusandae, nemo eos harum sapiente quia molestiae fugit. Eveniet consequatur, illum explicabo aspernatur voluptas reprehenderit deleniti debitis.</p>
-                    </div>
-                </div>
-                
-                <div class="alinear"> 
-                    <div class="nosotros">
-                        <img src="img/favicon.ico" alt="" width="100em">
-                        <h2 id="nombre">Iván</h2>
-                        <p id="sobreMi">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod totam rerum, optio, architecto recusandae, nemo eos harum sapiente quia molestiae fugit. Eveniet consequatur, illum explicabo aspernatur voluptas reprehenderit deleniti debitis.</p>
-                    </div>
-                </div>
-                
-                <div class="alinear">
-                    <div class="nosotros">
-                        <img src="img/favicon.ico" alt="" width="100em">
-                        <h2 id="nombre">Mateo</h2>
-                        <p id="sobreMi">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod totam rerum, optio, architecto recusandae, nemo eos harum sapiente quia molestiae fugit. Eveniet consequatur, illum explicabo aspernatur voluptas reprehenderit deleniti debitis.</p>
-                    </div>
-                </div>
-                </div>
-    </main>
-    <div id="back_modal" class="hid">      
-      <div id="signInDiv" class="contenedor-iniciar-sesion hid">
-        <div class="mover">
-            <div class="contenedor-sesion__inputs">
-                <h1 class="title">Inicia Sesion GreenHouse</h1>
-                <input id="email-login" type="text" placeholder="Email" style="font-size: 1rem;">
-                <input id="password-login" type="password" placeholder="Contraseña" style="font-size: 1rem;">
-                <div id="desvio-crear">
-                    <h2 id="desvio-h2">En caso de no tener una cuenta, <a href="#" id="crear-Sesion-Anchor">crea una</a></h2>
-                </div>
-                <div class="botones botones-crear-sesion">
-                    <button id="boton-cerrar-signin">Cerrar</button>
-                    <button id="signin">Iniciar Sesión</button>
-                </div>
-            </div>
-        </div>
-            <img src="auth/back_logo.png" alt="modalfoto" class="img__modal">
+  <header>
+    <nav class="navbar bg-light tamaño navlap">
+      <div class="nav-logo">
+        <a class="navbar-brand" href="index.html">
+          <img src="img/grinja.png" alt="logo">
+        </a>
       </div>
-          <div id="signUpDiv" class="contenedor-crear-sesion hid">
-            <div class="mover">
-                <div class="contenedor-sesion__inputs">
-                    <h1 class="title">Forma parte de GreenHouse</h1>
-                    <input id="email" type="text" placeholder="Email" style="font-size: 1rem;">
-                    <input id="password" type="password" placeholder="Contraseña" style="font-size: 1rem;">
-                    <div id="desvio-crear">
-                        <h2 id="desvio-h2">Si ya tienes una cuenta, <a href="#" id="iniciar-Sesion-Anchor">inicia sesión</a></h2>
-                    </div>
-                    <div class="botones botones-crear-sesion">
-                        <button id="boton-cerrar-signup">Cerrar</button>
-                        <button id="signup">Crear sesión</button>
-                    </div>
-                </div>
-            </div>
-        <img src="auth/back_logo.png" alt="modalfoto" class="img__modal">
+      <div class="container">
+        <a class="item" href="nosotros.html">Nosotros</a>
+        <a class="item" href="guia.html">Guías</a>
+        <a class="item" href="galeria.html">Galería</a>
+        <a class="item" href="contacto.html">Contacto</a>
+        <button id="boton-Auth" type="button" class="btn btn-primary">Forma parte</button>
+      </div>
+    </nav>
+    <nav class="navbar bg-light fixed-top navipad">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html"><img src="img/grinja.png" alt="ipadlogo" id="ipadlogo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-backdrop="false" id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><a href="index.html" id="ham_title">GreenHouse</a>
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="nosotros.html">Nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="guia.html">Guías</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="galeria.html">Galería</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contacto.html">Contacto</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="boton-Auth-mobile">Forma Parte</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="nosotros_main">
+    <div class="contenido_nosotros">
+      <div class="alinear">
+        <div class="nosotros">
+          <img src="img/favicon.ico" alt="" width="100em">
+          <h2 id="nombre">Uriel</h2>
+          <p id="sobreMi">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod totam rerum, optio, architecto
+            recusandae, nemo eos harum sapiente quia molestiae fugit. Eveniet consequatur, illum explicabo aspernatur
+            voluptas reprehenderit deleniti debitis.</p>
+        </div>
+      </div>
+
+      <div class="alinear">
+        <div class="nosotros">
+          <img src="img/favicon.ico" alt="" width="100em">
+          <h2 id="nombre">Juan</h2>
+          <p id="sobreMi">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod totam rerum, optio, architecto
+            recusandae, nemo eos harum sapiente quia molestiae fugit. Eveniet consequatur, illum explicabo aspernatur
+            voluptas reprehenderit deleniti debitis.</p>
+        </div>
+      </div>
+
+      <div class="alinear">
+        <div class="nosotros">
+          <img src="img/favicon.ico" alt="" width="100em">
+          <h2 id="nombre">Iván</h2>
+          <p id="sobreMi">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod totam rerum, optio, architecto
+            recusandae, nemo eos harum sapiente quia molestiae fugit. Eveniet consequatur, illum explicabo aspernatur
+            voluptas reprehenderit deleniti debitis.</p>
+        </div>
+      </div>
+
+      <div class="alinear">
+        <div class="nosotros">
+          <img src="img/favicon.ico" alt="" width="100em">
+          <h2 id="nombre">Mateo</h2>
+          <p id="sobreMi">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod totam rerum, optio, architecto
+            recusandae, nemo eos harum sapiente quia molestiae fugit. Eveniet consequatur, illum explicabo aspernatur
+            voluptas reprehenderit deleniti debitis.</p>
+        </div>
       </div>
     </div>
-    <script type="module" src="js/app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  </main>
+  <div id="back_modal" class="hid">
+    <div class="contenedor_ip hid">
+      <img src="auth/back_logo.png" alt="back_ip" class="img_ip">
+      <div class="contenedor_ip_texto">
+        <h1 class="title_ip">Ingrese la IP en pantalla</h1>
+        <div class="contenedor_ip_input">
+          <input id="ip-input" type="text" placeholder="IP del Display">
+        </div>
+        <div class="contenedor_ip_botones">
+          <button id="ip-boton-cerrar" class="ip_boton cerrar">Cerrar</button>
+          <button id="ip-aceptar" class="ip_boton">Aceptar</button>
+        </div>
+      </div>
+    </div>
+    <div id="signInDiv" class="contenedor-iniciar-sesion hid">
+      <div class="mover">
+        <div class="contenedor-sesion__inputs">
+          <h1 class="title">Inicia Sesion GreenHouse</h1>
+          <input id="email-login" type="text" placeholder="Email" style="font-size: 1rem;">
+          <input id="password-login" type="password" placeholder="Contraseña" style="font-size: 1rem;">
+          <div id="desvio-crear">
+            <h2 id="desvio-h2">En caso de no tener una cuenta, <a href="#" id="crear-Sesion-Anchor">crea una</a></h2>
+          </div>
+          <div class="botones botones-crear-sesion">
+            <button id="boton-cerrar-signin">Cerrar</button>
+            <button id="signin">Iniciar Sesión</button>
+          </div>
+        </div>
+      </div>
+      <img src="auth/back_logo.png" alt="modalfoto" class="img__modal">
+    </div>
+    <div id="signUpDiv" class="contenedor-crear-sesion hid">
+      <div class="mover">
+        <div class="contenedor-sesion__inputs">
+          <h1 class="title">Forma parte de GreenHouse</h1>
+          <input id="email" type="text" placeholder="Email" style="font-size: 1rem;">
+          <input id="password" type="password" placeholder="Contraseña" style="font-size: 1rem;">
+          <div id="desvio-crear">
+            <h2 id="desvio-h2">Si ya tienes una cuenta, <a href="#" id="iniciar-Sesion-Anchor">inicia sesión</a></h2>
+          </div>
+          <div class="botones botones-crear-sesion">
+            <button id="boton-cerrar-signup">Cerrar</button>
+            <button id="signup">Crear sesión</button>
+          </div>
+        </div>
+      </div>
+      <img src="auth/back_logo.png" alt="modalfoto" class="img__modal">
+    </div>
+  </div>
+  <script type="module" src="js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
 </body>
+
 </html>

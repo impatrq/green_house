@@ -445,7 +445,7 @@ body{
     align-items: center;
     gap: 2rem;
     padding: 1rem;
-    position: relative;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
