@@ -26,6 +26,7 @@ soilHumidity = 0
 ldrState = ""
 temp = 0
 hum = 0
+date = ""
 
 lock = _thread.allocate_lock()                                  # El código tiene dos hilos, uno mide con los sensores, y el otro espera una conexion
                                                                 # de un socket. Ambos trabajan de manera independiente mediante locks (semaphores)
@@ -72,7 +73,7 @@ def getLDR():
 
     ldrAverage = (RLDR1 + RLDR2) / 2                                                 # Calculo promedio de iluminacion entre ambos LDR // WIP
     print("Valor promedio LDRs: ", ldrAverage)
-    if(ldrAverage > 7000):
+    if(ldrAverage > 10000000):
         ldrState = "Oscuro"
     else:
         ldrState = "Iluminado"
@@ -119,7 +120,7 @@ def watering():
     print(soilHumidity)
     if(int(soilHumidity) >= optimalHumidity):
         print("Debo regar")
-        #getTime()
+        getTime()
     else:
         print("No debo regar")
     soilHumidity = str(soilHumidity)
@@ -135,19 +136,25 @@ def cooling():
         print("Hace frio")
         
 def getTime():
+    global date
     rtc = RTC()
     ntptime.settime()
     currentDate = rtc.datetime()
     currentDay = currentDate[2]
     currentMonth = currentDate[1]
-    print(currentDay)
-    print(currentMonth)
+    currentHour = int(currentDate[4]) - 3                       #-3 because of GMT-3 for Argentina
+    currentMinute = int(currentDate[5])
+    currentSecond = int(currentDate[6])
+    completeHour = str(currentHour) + ":" + str(currentMinute)  # Hours + Minutes
+    completeDate = str(currentDay) + "/" + str(currentMonth)    # Day + Month
+    date = completeDate + " - " + completeHour                  # Complete Date (Time and Day)
     
 def webPage():
-    global soilHumidity, ldrState, temp, hum
+    global soilHumidity, ldrState, temp, hum, date
     temp = str(temp)
     hum = str(hum)
     soilHumidity = str(soilHumidity)
+    date = str(date)
     html = f"""
             <!DOCTYPE html>
             <html lang="es">
@@ -278,9 +285,9 @@ def webPage():
                         <div class="contenedor-variables">
                             <div class="datos mover"><label for="temp">Temperatura ambiente</label><meter id="temp" value ="{temp}" min="0" max="50"></meter><p>{temp + " °C"}</p></div>
                             <div class="datos"><label for="hum">Humedad ambiente</label><meter id="hum" value="{hum}" min="0" max="100"></meter><p>{hum + " %"}</p></div>
-                            <div class="datos"><label for="hum_tierra">Humedad de la tierra</label><meter low="" optimum="1000" high="3000" min="1" max="4095" value= "{soilHumidity}" id="hum_tierra"></meter></div>
+                            <div class="datos"><label for="hum_tierra">Humedad de la tierra</label><meter low="100" optimum="1000" high="3000" min="1" max="4095" value= "{soilHumidity}" id="hum_tierra"></meter></div>
                             <div class="datos"><label for="lum">Luminosidad:</label><p>{ldrState}</p></div>
-                            <div class="datos"><label for="riego">Última vez regado:</label><p></p></div>
+                            <div class="datos"><label for="riego">Última vez regado: </label><p>{date}</p></div>
                         </div>
                         <div id= "boton">
                             <a href="/update"><button>Actualizar Datos</button></a>
@@ -298,9 +305,8 @@ s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind(('', 80))
 s.listen(5)
 
-tim0 =Timer(0)                                                              # Este timer se activa cada 1 hora (3600000 milisegundos)  // 10000 ms TEST        
+tim0 = Timer(0)                                                               # Este timer se activa cada 1 hora (3600000 milisegundos)  // 10000 ms TEST        
 tim0.init(period=30000, mode=Timer.PERIODIC, callback=getStates)            # para verificar el estado    
-
 while True:
         print("Hilo 0")  
         setNetwork()
