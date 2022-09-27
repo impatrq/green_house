@@ -17,11 +17,15 @@ sensor = dht.DHT22(Pin(32))
 adcLDR1 = ADC(Pin(39))
 adcLDR2 = ADC(Pin(34))
 adcHL = ADC(Pin(35))
-relayValvula = Pin(27, Pin.OUT)
-relayVentiladores = Pin(25, Pin.OUT)
-relayLuces = Pin(32, Pin.OUT)
+relayValve= Pin(25, Pin.OUT)
+relayCoolers = Pin(26, Pin.OUT)
+relayLights = Pin(33, Pin.OUT)
+relayValve.value(0)
+relayCoolers.value(0)
+relayLights.value(0)
 
 #Definicion variables
+soilPercentage = 0
 soilHumidity = 0
 ldrState = ""
 temp = 0
@@ -84,8 +88,15 @@ def getHL():
     HLRead= adcHL.read()                                                              # Valores de lectura con el ADC.
     sleep(1)
     global soilHumidity
+    global soilPercentage
     soilHumidity = HLRead
-    print("La humedad de suelo: " ,soilHumidity)
+    max_moisture=65535
+    min_moisture=0
+    soilPercentage = (max_moisture-adcHL.read_u16())*100/(max_moisture-min_moisture)
+    soilPercentage = (int(soilPercentage))
+    print(soilPercentage)
+    #print("moisture: " + "%.2f" % soilPercentage +"% (adc: "+str(adcHL.read_u16())+")")
+    #print("La humedad de suelo: " ,soilHumidity)
         
 def getDHT():
     global temp, hum
@@ -94,6 +105,7 @@ def getDHT():
         sensor.measure()
         temp = sensor.temperature()
         hum = sensor.humidity()
+        hum = int(hum)
         print('Temperature: %3.1f C' %temp)
         print('Humidity: %3.1f %%' %hum)
     except OSError as e:
@@ -116,11 +128,27 @@ def lighting():
 
 def watering():
     optimalHumidity = 2200
+    loopState = True
     global soilHumidity
     print(soilHumidity)
     if(int(soilHumidity) >= optimalHumidity):
         print("Debo regar")
+        relayValve.value(1)                               #Activates Water Valve to start watering
         getTime()
+        sleep(5)
+        getHL()
+        while(loopState):
+            sleep(5)
+            if(int(soilHumidity) >= optimalHumidity):
+                relayValve.value(1)
+                loopState = True
+                print("Debo volver a regar")
+                getHL()
+            else:
+                relayValve.value(0)
+                loopState = False
+                print("No debo volver a regar")
+
     else:
         print("No debo regar")
     soilHumidity = str(soilHumidity)
@@ -136,6 +164,10 @@ def cooling():
         print("Hace frio")
         
 def getTime():
+    """
+    Utility: 
+    
+    """
     global date
     rtc = RTC()
     ntptime.settime()
@@ -150,10 +182,11 @@ def getTime():
     date = completeDate + " - " + completeHour                  # Complete Date (Time and Day)
     
 def webPage():
-    global soilHumidity, ldrState, temp, hum, date
+    global soilPercentage, ldrState, temp, hum, date
     temp = str(temp)
     hum = str(hum)
-    soilHumidity = str(soilHumidity)
+    soilHumidity = str(soilPercentage)
+    soilPercentage = str(soilPercentage)
     date = str(date)
     html = f"""
             <!DOCTYPE html>
@@ -285,7 +318,7 @@ def webPage():
                         <div class="contenedor-variables">
                             <div class="datos mover"><label for="temp">Temperatura ambiente</label><meter id="temp" value ="{temp}" min="0" max="50"></meter><p>{temp + " °C"}</p></div>
                             <div class="datos"><label for="hum">Humedad ambiente</label><meter id="hum" value="{hum}" min="0" max="100"></meter><p>{hum + " %"}</p></div>
-                            <div class="datos"><label for="hum_tierra">Humedad de la tierra</label><meter low="100" optimum="1000" high="3000" min="1" max="4095" value= "{soilHumidity}" id="hum_tierra"></meter></div>
+                            <div class="datos"><label for="hum_tierra">Humedad de la tierra</label><meter low="0" high="100" min="0" max="100" value= "{soilPercentage}" id="hum_tierra"></meter><p>{soilPercentage + " %"}</p></div>
                             <div class="datos"><label for="lum">Luminosidad:</label><p>{ldrState}</p></div>
                             <div class="datos"><label for="riego">Última vez regado: </label><p>{date}</p></div>
                         </div>
@@ -306,7 +339,8 @@ s.bind(('', 80))
 s.listen(5)
 
 tim0 = Timer(0)                                                               # Este timer se activa cada 1 hora (3600000 milisegundos)  // 10000 ms TEST        
-tim0.init(period=30000, mode=Timer.PERIODIC, callback=getStates)            # para verificar el estado    
+tim0.init(period=30000, mode=Timer.PERIODIC, callback=getStates)              # para verificar el estado    
+
 while True:
         print("Hilo 0")  
         setNetwork()
