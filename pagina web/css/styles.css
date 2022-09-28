@@ -148,6 +148,55 @@ body{
     border-color: white;
     border-style: double;
 }
+
+.modal_guia {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.boton_modal_guia {
+    border: none;
+    border-radius: 1.5rem;
+    background-color: #419E5B;
+    color: white;
+    font-family: 'Jost', sans-serif;
+    font-size: 1.2rem;
+    padding: 0.7rem;
+}
+
+.botones_modal_guia {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#mover_guia {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+#img_modal_guia {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
 /* Contacto */
 .contacto_main{
     display: flex;
@@ -309,6 +358,7 @@ body{
 .title {
     color:var(--verde);
     white-space: nowrap;
+    text-align: center;
 }
 
 .contenedor-crear-sesion {
