@@ -121,11 +121,12 @@ document.getElementById("closeGuide").addEventListener('click', function() {
     guiaModal.classList.add("hid");
 })
 
-// Code to determine the height of the main content in "Guías"
-let body = document.querySelector("body");
-let header = document.querySelector("header");
-let contGuia = document.querySelector(".cont_guia");
-contGuia.style.height = `${body.clientHeight - header.clientHeight}px`;
+// Code to set the height of the main content in "Guías"
+
+let body = document.querySelector("body");  //Selecciono el elemento body
+let header = document.querySelector("header"); //Selecciono el elemento header
+let contGuia = document.querySelector(".cont_guia"); //Selecciono el div que contiene la informacion de guias
+contGuia.style.height = `${body.clientHeight - header.clientHeight}px`; //Resto la altura del body y la del header para determinar la altura del contenedor de guias
 
 
 
