@@ -198,18 +198,8 @@ body{
    width: 100%;
 }
 
-.back_modal{
-    background-color: rgba(0, 0, 0, 0.75);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    z-index: 1;
-}
-
 #cerrar_guia {
+    margin: 0%;
     width: fit-content;
     margin: 0 auto;
     color: var(--verde);
