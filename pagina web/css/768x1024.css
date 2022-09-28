@@ -63,7 +63,7 @@
         background-color: rgba(13, 101, 38, 0.25);
         border: none;
     }
-    .momo{
+    .img_guias{
         width: 10em;
     }
     .text{
@@ -75,5 +75,12 @@
     /* galeria */
     .carrousel .img {
         width: 50%;
+    }
+    /* contacto */
+    #contacto-title {
+        top: 0.5rem;
+    }
+    .formulario {
+        top: 5.5rem;
     }
 }

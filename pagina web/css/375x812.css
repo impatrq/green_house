@@ -92,4 +92,17 @@
     .botones_modal_guia {
         gap: 1rem;
     }
+    /*contacto*/
+    #contacto-title {
+        font-size: 3rem;
+    }
+
+    .formulario {
+        padding: 0;
+        padding-top: 2rem;
+    }
+
+    .campo-text {
+        padding: 1.5rem;
+    }
 }

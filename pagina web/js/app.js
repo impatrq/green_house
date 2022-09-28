@@ -121,6 +121,7 @@ document.getElementById("closeGuide").addEventListener('click', function() {
     guiaModal.classList.add("hid");
 })
 
+// Code to determine the height of the main content in "Guías"
 let body = document.querySelector("body");
 let header = document.querySelector("header");
 let contGuia = document.querySelector(".cont_guia");
