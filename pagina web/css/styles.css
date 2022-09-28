@@ -12,6 +12,9 @@ html{
 body{
     font-family: 'Jost', sans-serif;
 }
+body::-webkit-scrollbar {
+    display: none;
+}
 .hero{
     background-color: var(--verde);
     height: calc(100vh - 6.25em);

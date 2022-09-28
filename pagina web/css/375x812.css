@@ -66,7 +66,8 @@
         grid-template-rows: 1fr 1fr 1fr;
         grid-gap: 1em;
    }
-   .momo{
+   .img_guias{
+        margin-bottom: 1em;
         width: 8em;
    }
    /* Nosotros */
