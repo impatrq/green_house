@@ -21,6 +21,7 @@ const backModal = document.getElementById("back_modal");       //Gets Black Back
 const sideMenu = document.getElementById("offcanvasNavbar");   //Gets sideMenu reference
 const inputIP = document.getElementById("ip-input");           //Gets input IP reference
 const guiaModal = document.getElementById("modalGuide")        //Gets modalGuide reference
+const modalIP = document.getElementById("modalIP")             //Gets modalIP reference
 var userValid = false;       
 
 //Sign Up logic
@@ -109,13 +110,22 @@ document.getElementById("ip-boton-cerrar").addEventListener('click', function(){
 
 //Open Modal Guia
 document.getElementById("openGuide").addEventListener('click', function() {
-    backModal.classList.remove("hid")
-    guiaModal.classList.remove("hid")
+    backModal.classList.remove("hid");
+    guiaModal.classList.remove("hid");
+    modalIP.classList.add("hid");
 })
 
 //Close Modal Guia
 document.getElementById("closeGuide").addEventListener('click', function() {
-    backModal.classList.add("hid")
-    guiaModal.classList.add("hid")
+    backModal.classList.add("hid");
+    guiaModal.classList.add("hid");
 })
+
+let body = document.querySelector("body");
+let header = document.querySelector("header");
+let contGuia = document.querySelector(".cont_guia");
+contGuia.style.height = `${body.clientHeight - header.clientHeight}px`;
+
+
+
 

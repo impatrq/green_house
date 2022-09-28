@@ -45,12 +45,14 @@
     /* Guia */
     .main-guia{
         width: 100%;
+        height: calc(100vh - 5.55em);
         background-image: url(../img/Background_Guias.png);
     }
     .cont_guia{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 1em;
+        max-width: 100vw;
     }
     .guia-1{
         height: 75%;
