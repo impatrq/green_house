@@ -20,6 +20,8 @@ const signInDiv = document.getElementById("signInDiv");        //Gets singInDiv 
 const backModal = document.getElementById("back_modal");       //Gets Black Background when modal is being showed
 const sideMenu = document.getElementById("offcanvasNavbar");   //Gets sideMenu reference
 const inputIP = document.getElementById("ip-input");           //Gets input IP reference
+const guiaModal = document.getElementById("modalGuide")        //Gets modalGuide reference
+const modalIP = document.getElementById("modalIP")             //Gets modalIP reference
 var userValid = false;       
 
 //Sign Up logic
@@ -105,4 +107,27 @@ document.getElementById("ip-aceptar").addEventListener('click', function(){ //Ch
 document.getElementById("ip-boton-cerrar").addEventListener('click', function(){
     backModal.classList.add("hid");
 })
+
+//Open Modal Guia
+document.getElementById("openGuide").addEventListener('click', function() {
+    backModal.classList.remove("hid");
+    guiaModal.classList.remove("hid");
+    modalIP.classList.add("hid");
+})
+
+//Close Modal Guia
+document.getElementById("closeGuide").addEventListener('click', function() {
+    backModal.classList.add("hid");
+    guiaModal.classList.add("hid");
+})
+
+// Code to set the height of the main content in "Guías"
+
+let body = document.querySelector("body");  //Selecciono el elemento body
+let header = document.querySelector("header"); //Selecciono el elemento header
+let contGuia = document.querySelector(".cont_guia"); //Selecciono el div que contiene la informacion de guias
+contGuia.style.height = `${body.clientHeight - header.clientHeight}px`; //Resto la altura del body y la del header para determinar la altura del contenedor de guias
+
+
+
 

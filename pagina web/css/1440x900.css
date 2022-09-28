@@ -62,8 +62,16 @@
         padding: 0 15em;
     }
 
-    .momo {
+    .img_guias {
         width: 10em;
+    }
+    /*contacto*/
+    .formulario {
+        top: 5.5rem;
+    }
+
+    #contacto-title {
+        top: 0.5rem;
     }
 
 }
