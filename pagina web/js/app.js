@@ -20,6 +20,7 @@ const signInDiv = document.getElementById("signInDiv");        //Gets singInDiv 
 const backModal = document.getElementById("back_modal");       //Gets Black Background when modal is being showed
 const sideMenu = document.getElementById("offcanvasNavbar");   //Gets sideMenu reference
 const inputIP = document.getElementById("ip-input");           //Gets input IP reference
+const guiaModal = document.getElementById("modalGuide")        //Gets modalGuide reference
 var userValid = false;       
 
 //Sign Up logic
@@ -104,5 +105,17 @@ document.getElementById("ip-aceptar").addEventListener('click', function(){ //Ch
 
 document.getElementById("ip-boton-cerrar").addEventListener('click', function(){
     backModal.classList.add("hid");
+})
+
+//Open Modal Guia
+document.getElementById("openGuide").addEventListener('click', function() {
+    backModal.classList.remove("hid")
+    guiaModal.classList.remove("hid")
+})
+
+//Close Modal Guia
+document.getElementById("closeGuide").addEventListener('click', function() {
+    backModal.classList.add("hid")
+    guiaModal.classList.add("hid")
 })
 
