@@ -156,8 +156,67 @@ body{
     right: 0;
     bottom: 0;
     margin: auto;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+#mover_guia {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.boton_modal_guia {
+    border: none;
+    border-radius: 1.5rem;
+    background-color: #419E5B;
+    color: white;
+    font-family: 'Jost', sans-serif;
+    font-size: 1.2rem;
+    padding: 0.7rem;
+}
+
+.botones_modal_guia {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#img_modal_guia {
+   margin: 0 auto;
+   width: 100%;
+}
+
+.back_modal{
+    background-color: rgba(0, 0, 0, 0.75);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 1;
+}
+
+#cerrar_guia {
+    width: fit-content;
+    margin: 0 auto;
+    color: var(--verde);
+    background-color: white;
+    border: 1px solid;
+}
+/*
 .boton_modal_guia {
     border: none;
     border-radius: 1.5rem;
@@ -196,7 +255,7 @@ body{
     bottom: 0;
     left: 0;
     margin: auto;
-}
+}*/
 /* Contacto */
 .contacto_main{
     display: flex;
