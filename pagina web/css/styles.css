@@ -292,6 +292,10 @@ body{
     justify-content: center;
 }
 
+.nosotros__imagen {
+    border-radius: 50%;
+}
+
 /* CSS modal */
 
 .mover {
