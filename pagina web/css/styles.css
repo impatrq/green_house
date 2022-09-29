@@ -12,6 +12,9 @@ html{
 body{
     font-family: 'Jost', sans-serif;
 }
+body::-webkit-scrollbar {
+    display: none;
+}
 .hero{
     background-color: var(--verde);
     height: calc(100vh - 6.25em);
@@ -126,9 +129,10 @@ body{
     color: white;
     text-align: center;
 }
-.momo{
-    padding-top: 1.5625em;
-    width: 15.625em;
+.img_guias{
+    margin-top: 1em;
+    width: 10em;
+    border-radius: 50%;
 }
 .main-guia{
     height: calc(100vh - 6.25em);
@@ -148,6 +152,116 @@ body{
     border-color: white;
     border-style: double;
 }
+
+.modal_guia {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    padding: 1rem;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mover_guia {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.boton_modal_guia {
+    border: none;
+    border-radius: 1.5rem;
+    background-color: #419E5B;
+    color: white;
+    font-family: 'Jost', sans-serif;
+    font-size: 1.2rem;
+    padding: 0.7rem;
+}
+
+.botones_modal_guia {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#img_modal_guia {
+   margin: 0 auto;
+   width: 100%;
+}
+
+.cerrar_guia {
+    margin: 0%;
+    width: fit-content;
+    margin: 0 auto;
+    color: var(--verde);
+    background-color: white;
+    border: 1px solid;
+}
+
+.enlaces_descarga {
+    text-decoration: none;
+    color: white;
+}
+
+.enlaces_descarga:hover {
+    font-size: 1.5rem;
+    color: white;
+    transition: 0.3s ease-in-out;
+}
+/*
+.boton_modal_guia {
+    border: none;
+    border-radius: 1.5rem;
+    background-color: #419E5B;
+    color: white;
+    font-family: 'Jost', sans-serif;
+    font-size: 1.2rem;
+    padding: 0.7rem;
+}
+
+.botones_modal_guia {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#mover_guia {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+#img_modal_guia {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}*/
 /* Contacto */
 .contacto_main{
     display: flex;
@@ -213,6 +327,10 @@ body{
 }
 #redes{
     margin-top: 2.5em;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
 }
 #contacto-title{
     font-size: 4em;
@@ -313,6 +431,7 @@ body{
 .title {
     color:var(--verde);
     white-space: nowrap;
+    text-align: center;
 }
 
 .contenedor-crear-sesion {
@@ -414,7 +533,7 @@ body{
     background-color: rgba(0, 0, 0, 0.75);
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     top:25%;
     left: 0;
     right: 0;
