@@ -493,6 +493,19 @@ def webPage():
                         </div>
                     </div>
                 </main>
+            <script>
+                const buttonDatos = document.getElementByID("boton");
+                buttonDatos.addEventListener("click", function(){
+                    setTimeout(disable, 1000);
+                    setTimeout(enable, 1000);
+                })
+                function disable(){
+                buttonDatos.disable() = true;
+                }
+                function enable(){
+                buttonDatos.disable() = false;
+                }
+            </script>
             </body>
             </html>
             """
