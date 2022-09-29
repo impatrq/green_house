@@ -5,8 +5,6 @@
 #   Protocolo Web: Socket
 
 
-
-
 from hashlib import sha1
 from machine import Pin, ADC, Timer, RTC
 from time import sleep
@@ -18,16 +16,18 @@ adcLDR1 = ADC(Pin(39))
 adcLDR2 = ADC(Pin(34))
 adcHL = ADC(Pin(35))
 relayValve= Pin(25, Pin.OUT)
-relayCoolers = Pin(26, Pin.OUT)
-relayLights = Pin(33, Pin.OUT)
-relayValve.value(0)
-relayCoolers.value(0)
-relayLights.value(0)
+relayCoolers = Pin(33, Pin.OUT)
+relayLights = Pin(26, Pin.OUT)
+relayValve.value(1)
+relayCoolers.value(1)
+relayLights.value(1)
 
 #Definicion variables
 soilPercentage = 0
 soilHumidity = 0
 ldrState = ""
+loopStateLDR = True
+loopStateTemp = True
 temp = 0
 hum = 0
 date = ""
@@ -77,10 +77,10 @@ def getLDR():
 
     ldrAverage = (RLDR1 + RLDR2) / 2                                                 # Calculo promedio de iluminacion entre ambos LDR // WIP
     print("Valor promedio LDRs: ", ldrAverage)
-    if(ldrAverage > 10000000):
-        ldrState = "Oscuro"
-    else:
+    if(ldrAverage <= 34000):
         ldrState = "Iluminado"
+    else:
+        ldrState = "Oscuro"
     sleep(1)
 
 def getHL():
@@ -104,6 +104,7 @@ def getDHT():
     try:
         sensor.measure()
         temp = sensor.temperature()
+        temp = temp - 3
         hum = sensor.humidity()
         hum = int(hum)
         print('Temperature: %3.1f C' %temp)
@@ -121,10 +122,34 @@ def getStates(timer):                                                           
     
 def lighting():
     global ldrState
+    global loopStateLDR
+    loopStateLDR = True
+    print("El estado del LDR es: ",ldrState)
     if(ldrState == "Oscuro"):
         print("Debo iluminar")
+        relayLights.value(0)
+        sleep(5)
+        if(loopStateLDR):
+            print("Inicio de conteo LDR...")
+            tim1.init(period= 10000, mode=Timer.PERIODIC, callback=checkLighting)              # 1800000 ms // media hora para verificar el estado    
     else:
         print("No debo iluminar")
+        relayLights.value(1)
+        tim1.deinit()
+
+def checkLighting(timer):
+    global ldrState
+    global loopStateLDR
+    relayLights.value(1)
+    sleep(1)
+    if(ldrState == "Oscuro"):
+        relayLights.value(0)
+        print("Sigue estando oscuro")
+    else:
+        print("Dejó de estar oscuro, luces apagadas")
+        print("Apagando TIMER 1")
+        tim1.deinit()
+        relayLights.value(1)
 
 def watering():
     optimalHumidity = 2200
@@ -133,41 +158,56 @@ def watering():
     print(soilHumidity)
     if(int(soilHumidity) >= optimalHumidity):
         print("Debo regar")
-        relayValve.value(1)                               #Activates Water Valve to start watering
+        relayValve.value(0)                               #Activates Water Valve to start watering
         getTime()
         sleep(5)
         getHL()
         while(loopState):
             sleep(5)
             if(int(soilHumidity) >= optimalHumidity):
-                relayValve.value(1)
+                relayValve.value(0)
                 loopState = True
                 print("Debo volver a regar")
                 getHL()
             else:
-                relayValve.value(0)
+                relayValve.value(1)
                 loopState = False
                 print("No debo volver a regar")
-
     else:
         print("No debo regar")
     soilHumidity = str(soilHumidity)
     
 def cooling():
-    optimalTemp = 20
+    optimalTemp = 22
     global temp
+    loopStateTemp = True
     if(int(temp) > optimalTemp):
         print("Hace calor")
-    elif(int(temp) == optimalTemp):
-        print("No hacer nada")
-    else:
+        relayCoolers.value(0)
+        sleep(5)
+        if(loopStateTemp):
+            print("Inicio de conteo Temp...")
+            tim2.init(period= 10000, mode=Timer.PERIODIC, callback=checkCooling)              # 1800000 ms // media hora para verificar el estado
+            
+    elif(int(temp) <= optimalTemp):
         print("Hace frio")
         
+def checkCooling(timer):
+    print("Check Cooling initialized")
+    global temp
+    global loopStateTemp
+    relayCoolers.value(1)
+    sleep(1)
+    if(int(temp) > 22):
+        relayCoolers.value(0)
+        print("Sigue estando caliente")
+    else:
+        print("Dejó de estar caluroso, ventiladores apagados")
+        print("Apagando TIMER 2")
+        tim2.deinit()
+        relayCoolers.value(1)
+        
 def getTime():
-    """
-    Utility: 
-    
-    """
     global date
     rtc = RTC()
     ntptime.settime()
@@ -338,7 +378,9 @@ s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind(('', 80))
 s.listen(5)
 
-tim0 = Timer(0)                                                               # Este timer se activa cada 1 hora (3600000 milisegundos)  // 10000 ms TEST        
+tim0 = Timer(0) # Este timer se activa cada 1 hora (3600000 milisegundos)  // 10000 ms TEST        
+tim1 = Timer(1)
+tim2 = Timer(2)
 tim0.init(period=30000, mode=Timer.PERIODIC, callback=getStates)              # para verificar el estado    
 
 while True:
