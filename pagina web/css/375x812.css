@@ -83,6 +83,9 @@
    .contenedor_descripcion {
     width: 90%;
    }
+   .nosotros_title_descripcion {
+    font-size: 2.5rem;
+   }
    /* galeria */
    .carrousel .img {
     width: 85%;
