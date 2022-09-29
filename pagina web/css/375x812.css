@@ -78,8 +78,10 @@
         flex-direction: column;
    }
    .nosotros {
-        margin-top: 2em;
-        margin-bottom: 2em;
+        flex-direction: column;
+   }
+   .contenedor_descripcion {
+    width: 90%;
    }
    /* galeria */
    .carrousel .img {
