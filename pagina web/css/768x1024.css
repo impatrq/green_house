@@ -83,4 +83,8 @@
     .formulario {
         top: 5.5rem;
     }
+    /*nosotros*/
+    .contenedor_descripcion {
+        width: 95%;
+    }
 }
