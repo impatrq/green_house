@@ -384,26 +384,35 @@ body::-webkit-scrollbar {
 }
 /* Nosotros */
 .nosotros_main {
-    height: calc(100vh - 5.550625em);
+    position: absolute;
     background-image: url(../img/Background_Guias.png);
 }
 .contenido_nosotros{
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-.contenido_nosotros .nosotros {
     width: 75%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+.nosotros {
+    display: flex;
+    padding: 2rem;
+    width: 100%;
+    gap: 2rem;
+    font-size: 1.5rem;
+}
+.alumno {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    color: white;
-    border: none;
-    border-radius: 2em;
-    background-color: rgba(0, 0, 0, 0.25);
-    padding: 1em;
-
+}
+.alumno img {
+    width: 7rem;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+.alumno p {
+    text-align: center;
+    font-size: 1.5rem;
 }
 .alinear {
     display: flex;
@@ -413,6 +422,32 @@ body::-webkit-scrollbar {
 .nosotros__imagen {
     border-radius: 50%;
 }
+
+.contenedor_descripcion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    font-weight: lighter;
+    background-color: rgba(0, 0, 0, 0.25);
+    width: 75%;
+    margin: 0 auto 5rem auto;
+    border-radius: 5rem;
+}
+
+#nosotros_title {
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 3.5rem;
+}
+
+.nosotros_title_descripcion {
+    font-size: 3rem;
+    margin: 3rem 0;
+}
+
 
 /* CSS modal */
 
