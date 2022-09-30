@@ -51,7 +51,7 @@
     .cont_guia{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-gap: 1em;
+        grid-gap: 7em;
         max-width: 100vw;
     }
     .guia-1{
