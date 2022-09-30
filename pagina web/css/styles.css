@@ -222,6 +222,13 @@ body::-webkit-scrollbar {
     color: white;
     transition: 0.3s ease-in-out;
 }
+#a_descarga {
+    text-decoration: none;
+    color: var(--verde);
+}
+#a_descarga:hover {
+    color: white;
+}
 /*
 .boton_modal_guia {
     border: none;
