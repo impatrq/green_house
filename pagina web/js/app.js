@@ -123,10 +123,16 @@ document.getElementById("closeGuide").addEventListener('click', function() {
 
 // Code to set the height of the main content in "Guías"
 
-let body = document.querySelector("body");  //Selecciono el elemento body
+/*let body = document.querySelector("body");  //Selecciono el elemento body
 let header = document.querySelector("header"); //Selecciono el elemento header
 let contGuia = document.querySelector(".cont_guia"); //Selecciono el div que contiene la informacion de guias
 contGuia.style.height = `${body.clientHeight - header.clientHeight}px`; //Resto la altura del body y la del header para determinar la altura del contenedor de guias
+*/
+let header = document.querySelector("header")
+let main = document.querySelector(".main-guia")
+let body = document.querySelector("body")
+let cuenta = body.clientHeight - header.clientHeight;
+main.style.height = cuenta + "px";
 
 
 
