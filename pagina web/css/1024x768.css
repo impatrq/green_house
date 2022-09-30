@@ -78,11 +78,7 @@
     .cont_guia{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-gap: 3em;
-        padding-top: 4em;
-        padding-left: 4em;
-        padding-right: 4em;
-        height: calc(100vh - 5.550625em);
+        grid-gap: 10em;
     }
     .img_guias{
         width: 10em;
