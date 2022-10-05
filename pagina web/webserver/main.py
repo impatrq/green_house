@@ -18,6 +18,8 @@ adcHL = ADC(Pin(35))
 relayValve= Pin(25, Pin.OUT)
 relayCoolers = Pin(33, Pin.OUT)
 relayLights = Pin(26, Pin.OUT)
+waterLevel = Pin(5, Pin.IN)
+
 relayValve.value(1)
 relayCoolers.value(1)
 relayLights.value(1)
@@ -233,7 +235,8 @@ def watering():
 
     Utility: This function checks the soil moisture (it's triggered every hour by getSensors()). If it's lower than 2200, it means that soil is wet. If lower, soil is dry and it should start watering.
     After 5 seconds, it'll read the ADC Value from the sensor, and if it's still dry (and loopState is true), it'll water again activating the watering valve.
-    
+    It also has an emergency stop in case the water container has no water left.
+
     Takes: None
     
     Returns: None
@@ -263,6 +266,10 @@ def watering():
     else:
         print("No debo regar")
     soilHumidity = str(soilHumidity)
+    
+    if(waterLevel.value(0)):                              #Emergency Stop if water pump has no water
+        relayValve.value(1)
+
     
 def cooling():
     """
