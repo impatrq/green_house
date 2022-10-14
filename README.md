@@ -37,6 +37,6 @@ Greenhouse es un proyecto en proceso realizado por alumnos de la Escuela Secunda
 Si tenes opiniones o dudas sobre el proyecto que nos puedan ayudar, no dudes en ponerte en contacto con nosotros:
 
     📧 Email: greenhouse.impa@gmail.com
-    🌐 Página Web: AGREGAR PAGINA WEB
+    🌐 Página Web: https://projectgreenhouse.github.io/
     📷 Instagram: @greenhouse.impa
     🗞️ LinkedIn: https://www.linkedin.com/company/green-houseimpa/about/
