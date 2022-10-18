@@ -1,8 +1,8 @@
-#                                           // GREENHOUSE //
+#                                           // GREENHOUSE PROJECT//
 #
-#   El proyecto se basa en un sistema de control mediante sensores y actuadores. 
-#   Se utilizan: DHT22, LDRs, HL69.
-#   Protocolo Web: Socket
+#   This project is based on a control system using sensors and relays that trigger a cooling, lighting and watering system.
+#   It uses: DHT22 (temperature, humidity), LDRs (light), HL69 (soil moisture).
+#   Web Protocol: Socket
 
 
 from hashlib import sha1
@@ -10,7 +10,7 @@ from machine import Pin, ADC, Timer, RTC
 from time import sleep
 import _thread, dht, socket, ntptime
 
-#Init de sensores
+#Declaration of PINS and relay values are set to Off on start.
 sensor = dht.DHT22(Pin(32))
 adcLDR1 = ADC(Pin(39))
 adcLDR2 = ADC(Pin(34))
@@ -18,11 +18,13 @@ adcHL = ADC(Pin(35))
 relayValve= Pin(25, Pin.OUT)
 relayCoolers = Pin(33, Pin.OUT)
 relayLights = Pin(26, Pin.OUT)
+waterLevel = Pin(5, Pin.IN)
+
 relayValve.value(1)
 relayCoolers.value(1)
 relayLights.value(1)
 
-#Definicion variables
+#Global Variables used by webpage(). They're global to be used inside each function. Most of these functions need to share data between them.
 soilPercentage = 0
 soilHumidity = 0
 ldrState = ""
@@ -31,33 +33,52 @@ loopStateTemp = True
 temp = 0
 hum = 0
 date = ""
-
-lock = _thread.allocate_lock()                                  # El código tiene dos hilos, uno mide con los sensores, y el otro espera una conexion
-                                                                # de un socket. Ambos trabajan de manera independiente mediante locks (semaphores)
+lock = _thread.allocate_lock()                                  # This code uses 2 threads, the first one reads all the sensor data and the other one waits for connection
+                                                                # from a socket. Each of them are using a lock to prevent that to get wrong values.
 def setNetwork():
+    """
+
+    Utility: This function is called to initialize the WebServer. It looks for a connection from a socket. If true, it sends the webpage() return value as
+    a html file. It works with locks as semaphores to prevent that to get null data, or even old values.
+    
+    Takes: None
+    
+    Returns: None
+    
+    """
     lock.acquire()
     print("Initializing WebServer. Awaiting Connection...")
-    conn, addr = s.accept()                                     # Espera una conexion mediante un socket
+    conn, addr = s.accept()                                     # Waits for a connection from a socket (IP from DISPLAY 16x2)
     print('Got a connection from %s' % str(addr))
-    request = conn.recv(1024)
+    request = conn.recv(1024)                                   #It sets the amount of information (1024 bytes) that can be sent at once.
     request = str(request)
     print(request)
-    update = request.find('/update')                            # Busca /update en URL     
+    update = request.find('/update')                            # Looks for "/update" on the URL from the WebServer      
        
     if update == 6:
         print('update') 
         
-    response = webPage()                                        # Abre el HTML en la pagina
+    response = webPage()                                        # Uses the webpage() function return value to open it as a HTML file.
     conn.send('HTTP/1.1 200 OK\n')
     conn.send('Content-Type: text/html\n')
     conn.send('Connection: close\n\n')
-    conn.sendall(response)                                      # Envia el HTML
+    conn.sendall(response)                                      # Sends the HTML file to the WebServer
     conn.close()
     print("Releasing lock from network...")
     lock.release()                                                             
 
-def getSensors():                                            # getSensors es una funcion que engloba todas las funciones que toman resultados de mediciones
-    lock.acquire()                                           # Toma el lock para no sobre escribir/tomar mal datos
+def getSensors():                                            
+    """
+
+    Utility: This function is called everytime Thread 1 is initialized. It contains all the functions that read sensor values. It also uses locks, to prevent 
+    from being read by the WebServer. After reading the sensor values, it'll leave the lock, ready to be used for setNetwork().
+    
+    Takes: None
+    
+    Returns: None
+    
+    """
+    lock.acquire()                                           
     print("Initializing sensors...")
     getLDR()
     getHL()
@@ -66,16 +87,26 @@ def getSensors():                                            # getSensors es una
 
 
 def getLDR():
+    """
+
+    Utility: This function is called by getSensors(), it gets LDR state from an ADC conversion. It works with 2 ADC inputs (2 LDRs), and it sums them up to get
+    an average. It sets a boolean variable: On or Off.
+    
+    Takes: None
+    
+    Returns: It works with a global variable ldrState. Later, they it'll be used by getHTML().
+    
+    """
     global ldrState
-    ldrRead1 = adcLDR1.read() * (3.3/4096)                                          # Conversion ADC // valor lectura
+    ldrRead1 = adcLDR1.read() * (3.3/4096)                                          # ADC Conversion // Value
     RLDR1 = (ldrRead1 * 10000)/(3.3 - ldrRead1)
     print("El valor de la resistencia del LDR1 es: {:.0f}" .format(RLDR1))
     
-    ldrRead2 = adcLDR2.read() * (3.3/4096)                                           # 1000 ya está iluminado (full)
-    RLDR2 = (ldrRead2 * 10000)/(3.3 - ldrRead2)                                      # 40952430 está oscuro (full)
+    ldrRead2 = adcLDR2.read() * (3.3/4096)                                           
+    RLDR2 = (ldrRead2 * 10000)/(3.3 - ldrRead2)                                      
     print("El valor de la resistencia del LDR2 es: {:.0f}" .format(RLDR2))
 
-    ldrAverage = (RLDR1 + RLDR2) / 2                                                 # Calculo promedio de iluminacion entre ambos LDR // WIP
+    ldrAverage = (RLDR1 + RLDR2) / 2                                                 
     print("Valor promedio LDRs: ", ldrAverage)
     if(ldrAverage <= 34000):
         ldrState = "Iluminado"
@@ -84,8 +115,18 @@ def getLDR():
     sleep(1)
 
 def getHL():
-    adcHL.atten(ADC.ATTN_11DB)                                                        # La atenuacion tuvo que ser cambiada para poder tener mejores
-    HLRead= adcHL.read()                                                              # Valores de lectura con el ADC.
+    """
+
+    Utility: This function is called by getSensors(), it gets the soil moisture from an ADC. It needs an attenuation of 11dB to get proper results. 
+    From this value, it calculates the percentage of moisture.
+    
+    Takes: None
+    
+    Returns: It works with global variables as soilHumidity (ADC Value) and soilPercentage (% of moisture). Later, they will be used by getHTML().
+    
+    """
+    adcHL.atten(ADC.ATTN_11DB)                                                        
+    HLRead= adcHL.read()                                                              
     sleep(1)
     global soilHumidity
     global soilPercentage
@@ -95,16 +136,23 @@ def getHL():
     soilPercentage = (max_moisture-adcHL.read_u16())*100/(max_moisture-min_moisture)
     soilPercentage = (int(soilPercentage))
     print(soilPercentage)
-    #print("moisture: " + "%.2f" % soilPercentage +"% (adc: "+str(adcHL.read_u16())+")")
-    #print("La humedad de suelo: " ,soilHumidity)
         
 def getDHT():
+    """
+
+    Utility: This function is called by getSensors(), it gets the temperature and humidity.
+    
+    Takes: None
+    
+    Returns: It works with global variables as temp (temperature) and hum (humidity). Later, these variables will be used by getHTML().
+    
+    """
     global temp, hum
     temp = hum = 0
     try:
         sensor.measure()
         temp = sensor.temperature()
-        temp = temp - 3
+        temp = temp - 3                                          #It needs to be changed, 3 °C less to get the same temperature as in real life.
         hum = sensor.humidity()
         hum = int(hum)
         print('Temperature: %3.1f C' %temp)
@@ -112,7 +160,17 @@ def getDHT():
     except OSError as e:
         return('Failed to read sensor.')
 
-def getStates(timer):                                                                 # Esta es la funcion que el timer activa cada vez que se triggerea mismo, se trata de una funcion que pregunta por el estado de los sensores    
+def getStates(timer):
+    """
+
+    Utility: This function is a group of functions. Its purpose is to call all these functions to read the values from each sensor. This function is called by
+    a timer (tim0), seconds after connecting with the WebServer's socket.
+    
+    Takes: To call this function, it needs the keyword "timer".
+    
+    Returns: None
+    
+    """
     getLDR()
     getHL()
     getDHT()
@@ -121,6 +179,16 @@ def getStates(timer):                                                           
     cooling()
     
 def lighting():
+    """
+
+    Utility: This function checks the LDR state every hour by getSensors(). It's in charge of activating the lighting relays in case the light isn't enough.
+    Also, this function calls the tim1 to initialization in case the light isn't enough after 5 seconds.
+    
+    Parameters: None
+    
+    Returns: It works with global variables as ldrState and loopStateLDR. Later, these variables will be used by getHTML().
+    
+    """
     global ldrState
     global loopStateLDR
     loopStateLDR = True
@@ -131,13 +199,23 @@ def lighting():
         sleep(5)
         if(loopStateLDR):
             print("Inicio de conteo LDR...")
-            tim1.init(period= 1800000, mode=Timer.PERIODIC, callback=checkLighting)              # 1800000 ms // media hora para verificar el estado    
+            tim1.init(period= 10000, mode=Timer.PERIODIC, callback=checkLighting)              # 1800000 ms as 30 minutes    
     else:
         print("No debo iluminar")
         relayLights.value(1)
         tim1.deinit()
 
 def checkLighting(timer):
+    """
+
+    Utility: This function is called by tim1, this means the LDRs are not getting enough light, so the lighting system detected this issue. If it's dark, it'll light up the green house and 
+    and every 30 minutes, it'll turn off the lights, wait 1 second and ask if there's enough light. If not, it'll continue with the lights on.
+    
+    Parameters: To call this function, it needs the keyword "timer".
+    
+    Returns: None
+    
+    """
     global ldrState
     global loopStateLDR
     relayLights.value(1)
@@ -152,6 +230,17 @@ def checkLighting(timer):
         relayLights.value(1)
 
 def watering():
+    """
+
+    Utility: This function checks the soil moisture (it's triggered every hour by getSensors()). If it's lower than 2200, it means that soil is wet. If lower, soil is dry and it should start watering.
+    After 5 seconds, it'll read the ADC Value from the sensor, and if it's still dry (and loopState is true), it'll water again activating the watering valve.
+    It also has an emergency stop in case the water container has no water left.
+
+    Takes: None
+    
+    Returns: None
+    
+    """
     optimalHumidity = 2200
     loopState = True
     global soilHumidity
@@ -160,10 +249,10 @@ def watering():
         print("Debo regar")
         relayValve.value(0)                               #Activates Water Valve to start watering
         getTime()
-        sleep(15)
+        sleep(5)
         getHL()
-        while(loopState):
-            sleep(15)
+        while(loopState):                                 #If loopState is true, it will start a loop until soil is wet.
+            sleep(5)
             if(int(soilHumidity) >= optimalHumidity):
                 relayValve.value(0)
                 loopState = True
@@ -171,14 +260,28 @@ def watering():
                 getHL()
             else:
                 relayValve.value(1)
-                loopState = False
+                loopState = False                         #When it doesn't need to keep watering, 
                 print("No debo volver a regar")
     else:
         print("No debo regar")
     soilHumidity = str(soilHumidity)
     
+    if(waterLevel.value(0)):                              #Emergency Stop if water pump has no water
+        relayValve.value(1)
+
+    
 def cooling():
-    optimalTemp = 20
+    """
+
+    Utility: This function checks the temperature from the DHT22 (this function is called every hour by getSensors()). If it's higher than 22 °C, it triggers the cooling system, waits 5 seconds and
+    if loopStateTemp is true, it means that after 5 seconds the temperature is still high, so it needs to start a timer (tim2) that will call CheckCooling()
+    
+    Takes: None
+    
+    Returns: None
+    
+    """
+    optimalTemp = 22
     global temp
     loopStateTemp = True
     if(int(temp) > optimalTemp):
@@ -187,18 +290,28 @@ def cooling():
         sleep(5)
         if(loopStateTemp):
             print("Inicio de conteo Temp...")
-            tim2.init(period= 1800000, mode=Timer.PERIODIC, callback=checkCooling)              # 1800000 ms // media hora para verificar el estado
+            tim2.init(period= 10000, mode=Timer.PERIODIC, callback=checkCooling)              # 1800000 ms // media hora para verificar el estado
             
     elif(int(temp) <= optimalTemp):
         print("Hace frio")
         
 def checkCooling(timer):
+    """
+
+    Utility: This function is called by tim2. It checks if the DHT22 temperature, is lower or higher than 22 degrees °C. If it's higher the relay activates the cooling system. 
+    If not, it stops the timer and turns off the relay.
+    
+    Takes: To call this function, it needs the keyword "timer".
+    
+    Returns: None
+    
+    """
     print("Check Cooling initialized")
     global temp
     global loopStateTemp
     relayCoolers.value(1)
     sleep(1)
-    if(int(temp) > 20):
+    if(int(temp) > 22):
         relayCoolers.value(0)
         print("Sigue estando caliente")
     else:
@@ -208,6 +321,16 @@ def checkCooling(timer):
         relayCoolers.value(1)
         
 def getTime():
+    """
+
+    Utility: This function gets the current time based on the RTC (Real Time Clock) and the NTP (Network Time Protocol). 
+    It gets a tuple with a format from which we only use Day, Month, Hour, Minute and Second.
+    
+    Takes: None
+    
+    Returns: It works with a global variable "date". Later, this variable will be used by webpage().
+    
+    """
     global date
     rtc = RTC()
     ntptime.settime()
@@ -222,6 +345,15 @@ def getTime():
     date = completeDate + " - " + completeHour                  # Complete Date (Time and Day)
     
 def webPage():
+    """
+
+    Utility: This function is used to print its content into the Webserver's HTML.
+    
+    Takes: None
+    
+    Returns: the "html" variable that contains the whole content. This is used by the SetNetwork() / conn.sendall(response)
+    
+    """
     global soilPercentage, ldrState, temp, hum, date
     temp = str(temp)
     hum = str(hum)
@@ -367,21 +499,33 @@ def webPage():
                         </div>
                     </div>
                 </main>
+            <script>
+                const buttonDatos = document.getElementByID("boton");
+                buttonDatos.addEventListener("click", function(){
+                    setTimeout(disable, 1000);
+                    setTimeout(enable, 1000);
+                })
+                function disable(){
+                buttonDatos.disable() = true;
+                }
+                function enable(){
+                buttonDatos.disable() = false;
+                }
+            </script>
             </body>
             </html>
             """
     return html 
-    
     
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind(('', 80))
 s.listen(5)
 
-tim0 = Timer(0) 
-tim1 = Timer(1)
-tim2 = Timer(2)
-tim0.init(period=3600000, mode=Timer.PERIODIC, callback=getStates) # Este timer se activa cada 1 hora (3600000 milisegundos)  // 10000 ms TEST        
+tim0 = Timer(0)                                                               # This timer is triggered every hour (3600000 ms)  // 30000 ms TEST        
+tim1 = Timer(1)                                                               # Timer 1 is used to check the lighting value every 30 mins. Init is inside lighting()
+tim2 = Timer(2)                                                               # Timer 2 is used to check the cooling value every 30 mins. Init is inside cooling()
+tim0.init(period=30000, mode=Timer.PERIODIC, callback=getStates)                 
 
 while True:
         print("Hilo 0")  
