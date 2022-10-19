@@ -20,7 +20,7 @@ const signInDiv = document.getElementById("signInDiv");        //Gets singInDiv 
 const backModal = document.getElementById("back_modal");       //Gets Black Background when modal is being showed
 const sideMenu = document.getElementById("offcanvasNavbar");   //Gets sideMenu reference
 const inputIP = document.getElementById("ip-input");           //Gets input IP reference
-const guiaModal = document.getElementById("modalGuide")        //Gets modalGuide reference
+const guiaModal = document.getElementById("openGuide")        //Gets modalGuide reference
 const modalIP = document.getElementById("modalIP")             //Gets modalIP reference
 var userValid = false;       
 
@@ -131,8 +131,9 @@ contGuia.style.height = `${body.clientHeight - header.clientHeight}px`; //Resto 
 let header = document.querySelector("header")
 let main = document.querySelector(".main-guia")
 let body = document.querySelector("body")
-let cuenta = body.clientHeight - header.clientHeight;
-main.style.height = cuenta + "px";
+let cuenta = body.clientHeight - header.clientHeight
+main.style.height = cuenta + "px"
+
 
 
 
