@@ -376,6 +376,14 @@ body::-webkit-scrollbar {
     width: 50%;
     height: 50%;
 }
+.img_distinta {
+    -webkit-box-shadow: 5px 5px 50px 27px #000000; 
+    box-shadow: 5px 5px 50px 27px #000000;  
+    border: none;
+    border-radius: 2em;
+    width: 35%;
+    height: 35%;
+}
 .puntos{
     display:flex;
     flex-direction: row nowrap;
