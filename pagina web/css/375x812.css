@@ -97,8 +97,12 @@
    }
    /* galeria */
    .carrousel .img {
-    width: 85%;
-}
+    width: 90%;
+    }
+    .img_distinta {
+        width: 90%;
+        height: 90%;
+    }
     /*modal guia*/
     .boton_modal_guia {
         padding: 0.3rem;
