@@ -381,7 +381,18 @@ body::-webkit-scrollbar {
     align-items: center;
     background-image: url(../img/Background_Guias.png);
 }
-
+.carousel {
+    max-width: 50%;
+}
+.carousel-item {
+    width: fit-content;
+    margin: 0 auto;
+}
+.carousel-item img{
+    max-width: 50%;
+    border-radius: 50px;
+    margin: 0 auto;
+}
 .carrousel{
     display: flex;
     flex-flow: column;
