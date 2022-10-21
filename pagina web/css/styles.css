@@ -11,7 +11,7 @@ html{
   }
 body{
     font-family: 'Jost', sans-serif;
-    height: 100vh;
+    min-height: 100vh;
 }
 body::-webkit-scrollbar {
     display: none;
@@ -124,25 +124,50 @@ body::-webkit-scrollbar {
 }
 /* Pestaña Guia */
 .guia-1{
-    border: 1px solid;
-    margin-top: 6.25em;
+    /*
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2em;
+    max-width: 35rem;
+    font-size: 1.25em;
+    background-color: rgba(13, 101, 38, 0.25);
+    border: none;*/
+    display: grid;
+    grid-template-rows: fit-content(2);
+    font-size: 1.25em;
+    background-color: rgba(13, 101, 38, 0.25);
+    border-radius: 2em;
+    border: none;
+    padding: 1rem;
+}
+.guia_imagen {
+    width: fit-content;
     height: fit-content;
-    color: white;
+    margin: auto;
+}
+.guia-1_text {
     text-align: center;
+    color: white;
+    font-weight: lighter;
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
 }
 .img_guias{
-    margin-top: 1em;
     width: 10em;
     border-radius: 50%;
 }
 .main-guia{
-    height: calc(100vh - 6.25em);
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.cont_guia {
-    height: fit-content;
+.cont_guias {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2rem;
 }
 .btnguia{
     border-radius: 2em;

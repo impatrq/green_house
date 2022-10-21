@@ -57,28 +57,11 @@
     }
     /* guia */
     .main-guia{
-        height: calc(100vh - 5.550625em);
         background-image: url(../img/Background_Guias.png);
     }
     .navipad{
         height: 5.55em;
         visibility: hidden;
-    }
-    .container-fluid{
-        height: 5.55em;
-    }
-    .guia-1{
-        margin-top: 0%;
-        border: none;
-        border-radius: 2em;
-        background-color: rgba(13, 101, 38, 0.25);
-        width: 15em;
-        margin: 0 auto;
-    }
-    .cont_guia{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-gap: 10em;
     }
     .img_guias{
         width: 10em;
