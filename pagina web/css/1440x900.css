@@ -24,47 +24,6 @@
 
     /* Comienzo de guia.html */
 
-    .text {
-        margin-top: 10%;
-        /*font-size: 1em;*/
-        padding: 0 1em;
-    }
-
-    .text h2 {
-        font-size: 1.5em;
-    }
-
-    .text p {
-        font-size: 0.75em;
-    }
-
-    .guia-1 {
-        height: 75%;
-        border-radius: 2em;
-        margin: 5em auto;
-        width: 12em;
-        font-size: 1.25em;
-        background-color: rgba(13, 101, 38, 0.25);
-        border: none;
-    }
-
-    .cont_guia {
-
-        /*width: 100vw;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 2em;*/
-
-        width: 100vw;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-gap: 10em;
-        padding: 0 15em;
-    }
-
-    .img_guias {
-        width: 10em;
-    }
     /*contacto*/
     .formulario {
         top: 5.5rem;

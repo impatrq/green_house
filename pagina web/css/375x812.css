@@ -47,28 +47,15 @@
         border-style: double;
    }
    .main-guia{
-        width: 100%;
         background-color: #419E5B;
-        height: fit-content;
-   }
-   .guia-1{
-        margin: 0 auto;
-        border: none;
-        border-radius: 1em;
-        background-color: rgba(13, 101, 38, 0.25);
-        width: fit-content;
-        text-align: center;
-        padding: 1em;
-        font-size: 1.4em;
-   }
-   .cont_guia{
-        display: grid;
-        grid-template-rows: 1fr 1fr 1fr;
-        grid-gap: 1em;
    }
    .img_guias{
-        margin-bottom: 1em;
         width: 8em;
+   }
+   .cont_guias {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
    }
    /* Nosotros */
    .nosotros_main {
@@ -96,13 +83,18 @@
     text-align: center;
    }
    /* galeria */
+   .galeria_main {
+    flex-direction: column;
+    padding: 5rem;
+   }
+   .carrousel {
+    width: 20rem;
+    height: 20rem;
+    margin-bottom: 5rem;
+   }
    .carrousel .img {
-    width: 90%;
-    }
-    .img_distinta {
-        width: 90%;
-        height: 90%;
-    }
+    width: inherit;
+   }
     /*modal guia*/
     .boton_modal_guia {
         padding: 0.3rem;
